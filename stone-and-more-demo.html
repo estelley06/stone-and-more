@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stone & More — Lebanon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0D0C0B;
+  --bg2:#141210;
+  --bg3:#1C1916;
+  --surface:#232019;
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.12);
+  --gold:#C9A96E;
+  --gold2:#E8C98A;
+  --terra:#C1533A;
+  --terra2:#D96B50;
+  --text:#F0EDE8;
+  --muted:#8A8278;
+  --muted2:#B0A99F;
+  --white:#FEFCF9;
+  --r:16px;
+  --r2:24px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 2rem;
+  background:rgba(13,12,11,0.8);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:padding .3s;
+}
+.nav.scrolled{padding:.7rem 2rem}
+.nav-brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.nav-brand-icon{
+  width:36px;height:36px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  border-radius:8px;
+  font-size:1.1rem;
+  flex-shrink:0;
+}
+.nav-brand-text{
+  font-family:'DM Serif Display',serif;
+  font-size:1.15rem;color:var(--white);
+  line-height:1.1;
+}
+.nav-brand-text small{
+  display:block;font-family:'DM Sans',sans-serif;
+  font-size:.6rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);
+}
+.nav-links{display:flex;align-items:center;gap:.25rem}
+.nav-links a{
+  font-size:.82rem;font-weight:500;
+  letter-spacing:.04em;
+  color:var(--muted2);text-decoration:none;
+  padding:.5rem .9rem;
+  border-radius:8px;
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:var(--white);background:rgba(255,255,255,.05)}
+.nav-call{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--gold);color:#0D0C0B;
+  font-size:.8rem;font-weight:600;
+  padding:.55rem 1.2rem;
+  border-radius:50px;text-decoration:none;
+  transition:background .2s,transform .15s;
+  white-space:nowrap;
+}
+.nav-call:hover{background:var(--gold2);transform:scale(1.03)}
+.nav-call svg{width:14px;height:14px;flex-shrink:0}
+.burger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;padding:.4rem;border:none;background:none;
+}
+.burger span{display:block;width:22px;height:1.5px;background:var(--text);transition:.3s;border-radius:2px}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{
+  display:none;position:fixed;inset:0;top:65px;z-index:199;
+  background:rgba(13,12,11,.97);backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+  padding:2rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:'DM Serif Display',serif;
+  font-size:2.2rem;color:var(--text);text-decoration:none;
+  transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-menu .m-call{
+  margin-top:1rem;
+  background:var(--gold);color:#0D0C0B;
+  font-family:'DM Sans',sans-serif;
+  font-size:1rem;font-weight:600;
+  padding:.9rem 2.5rem;border-radius:50px;
+  text-decoration:none;
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100svh;
+  display:grid;place-items:center;
+  position:relative;overflow:hidden;
+  padding:6rem 2rem 4rem;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85') center/cover no-repeat;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(13,12,11,.97) 0%,rgba(13,12,11,.85) 50%,rgba(13,12,11,.6) 100%);
+}
+.hero-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:3rem;align-items:center;
+  max-width:1200px;width:100%;margin:0 auto;
+}
+.hero-left{}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(201,169,110,.12);
+  border:1px solid rgba(201,169,110,.25);
+  color:var(--gold);
+  font-size:.72rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:.4rem 1rem;border-radius:50px;
+  margin-bottom:1.75rem;
+}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2.6rem,5.5vw,4.5rem);
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:1.5rem;
+  color:var(--white);
+}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-desc{
+  font-size:1rem;font-weight:300;line-height:1.75;
+  color:var(--muted2);max-width:440px;
+  margin-bottom:2.5rem;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--gold);color:#0D0C0B;
+  font-size:.85rem;font-weight:600;
+  padding:.85rem 2rem;border-radius:50px;
+  text-decoration:none;transition:.2s;
+  white-space:nowrap;
+}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.6rem;
+  border:1px solid var(--border2);color:var(--text);
+  font-size:.85rem;font-weight:500;
+  padding:.85rem 2rem;border-radius:50px;
+  text-decoration:none;transition:.2s;
+  white-space:nowrap;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-right{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+}
+.hero-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  padding:1.5rem;
+  backdrop-filter:blur(10px);
+  transition:border-color .3s,background .3s;
+}
+.hero-card:hover{border-color:rgba(201,169,110,.3);background:rgba(255,255,255,.06)}
+.hero-card:first-child{grid-column:span 2}
+.hero-card-icon{font-size:1.6rem;margin-bottom:.75rem}
+.hero-card-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1rem;color:var(--white);
+  margin-bottom:.3rem;
+}
+.hero-card-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+.hero-stats-row{
+  display:flex;gap:2rem;margin-top:1rem;
+  padding-top:1rem;border-top:1px solid var(--border);
+}
+.hero-stat .n{
+  font-family:'DM Serif Display',serif;
+  font-size:1.5rem;color:var(--gold);display:block;
+}
+.hero-stat .l{font-size:.7rem;color:var(--muted);letter-spacing:.08em}
+
+/* ── TICKER ── */
+.ticker{
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--bg2);
+  padding:.75rem 0;
+}
+.ticker-track{
+  display:flex;gap:0;
+  animation:ticker 25s linear infinite;
+  width:max-content;
+}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-item{
+  font-family:'DM Sans',sans-serif;
+  font-size:.75rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);padding:0 2.5rem;
+  display:flex;align-items:center;gap:1rem;
+  white-space:nowrap;
+}
+.ticker-item::after{content:'✦';color:var(--gold);font-size:.5rem}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SECTION ── */
+.sec{padding:6rem 2rem;max-width:1200px;margin:0 auto}
+.sec-full{padding:6rem 2rem}
+.sec-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.7rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.25rem;
+}
+.sec-tag::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
+.sec-h{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  line-height:1.1;letter-spacing:-.02em;
+  color:var(--white);margin-bottom:1rem;
+}
+.sec-h em{font-style:italic;color:var(--gold)}
+.sec-p{font-size:.95rem;line-height:1.8;color:var(--muted2);max-width:520px}
+
+/* ── CATEGORIES ── */
+.cats-section{background:var(--bg2)}
+.cats-section .sec{padding:6rem 2rem}
+.cats-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--border);
+  border-radius:var(--r2);
+  overflow:hidden;
+  margin-top:3.5rem;
+}
+.cat{
+  background:var(--bg);
+  padding:2rem;
+  display:flex;flex-direction:column;gap:.75rem;
+  transition:background .3s;
+  cursor:default;
+  position:relative;
+  overflow:hidden;
+}
+.cat::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:2px;
+  background:var(--gold);transform:scaleX(0);
+  transition:transform .3s;transform-origin:left;
+}
+.cat:hover{background:var(--surface)}
+.cat:hover::after{transform:scaleX(1)}
+.cat-num{
+  font-size:.65rem;font-weight:600;
+  letter-spacing:.18em;color:var(--muted);
+  text-transform:uppercase;
+}
+.cat-icon{font-size:2rem;line-height:1}
+.cat-name{
+  font-family:'DM Serif Display',serif;
+  font-size:1.2rem;color:var(--white);
+  line-height:1.2;
+}
+.cat-desc{font-size:.82rem;line-height:1.65;color:var(--muted);flex:1}
+.cat-arrow{
+  display:inline-flex;width:32px;height:32px;
+  border:1px solid var(--border2);border-radius:50%;
+  align-items:center;justify-content:center;
+  color:var(--muted);font-size:.8rem;
+  margin-top:.5rem;transition:.2s;
+  align-self:flex-start;
+}
+.cat:hover .cat-arrow{border-color:var(--gold);color:var(--gold)}
+
+/* ── LOCATIONS ── */
+.locs-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+  margin-top:3rem;
+}
+.loc-card{
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.loc-card:hover{border-color:rgba(201,169,110,.3)}
+.loc-map{height:200px;background:var(--surface);overflow:hidden}
+.loc-map iframe{width:100%;height:100%;border:none;filter:grayscale(.4)contrast(1.1)brightness(.8)}
+.loc-body{padding:1.5rem}
+.loc-tag{
+  font-size:.65rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:.75rem;display:block;
+}
+.loc-name{
+  font-family:'DM Serif Display',serif;
+  font-size:1.25rem;color:var(--white);
+  margin-bottom:.4rem;
+}
+.loc-addr{font-size:.85rem;color:var(--muted2);line-height:1.6}
+.loc-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:1rem;font-size:.8rem;font-weight:500;
+  color:var(--gold);text-decoration:none;
+  transition:gap .2s;
+}
+.loc-link:hover{gap:.7rem}
+
+/* ── WHY ── */
+.why-bg{background:var(--bg3)}
+.why-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:center;
+}
+.feat-list{display:flex;flex-direction:column;gap:1rem;margin-top:2.5rem}
+.feat{
+  display:flex;gap:1.25rem;align-items:flex-start;
+  padding:1.25rem;
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  background:var(--bg2);
+  transition:.3s;
+}
+.feat:hover{border-color:rgba(201,169,110,.25);background:var(--surface)}
+.feat-icon{
+  width:44px;height:44px;flex-shrink:0;
+  background:rgba(201,169,110,.1);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+}
+.feat-body{}
+.feat-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1rem;color:var(--white);margin-bottom:.3rem;
+}
+.feat-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
+.why-visual{
+  position:relative;
+  border-radius:var(--r2);overflow:hidden;
+}
+.why-visual img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.why-visual-chip{
+  position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;
+  background:rgba(13,12,11,.85);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--border2);
+  border-radius:var(--r);
+  padding:1.25rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.why-chip-icon{
+  width:44px;height:44px;flex-shrink:0;
+  background:var(--terra);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+}
+.why-chip-text strong{display:block;font-size:.95rem;color:var(--white);margin-bottom:.15rem}
+.why-chip-text span{font-size:.78rem;color:var(--muted2)}
+
+/* ── GALLERY ── */
+.gallery-outer{background:var(--bg2);padding:4rem 0;overflow:hidden}
+.gallery-label{
+  font-size:.7rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);
+  text-align:center;margin-bottom:2rem;
+  display:flex;align-items:center;justify-content:center;gap:1rem;
+}
+.gallery-label::before,.gallery-label::after{content:'';flex:1;max-width:80px;height:1px;background:var(--border2)}
+.gal-track{display:flex;gap:1rem;animation:galscroll 35s linear infinite;width:max-content}
+.gal-track:hover{animation-play-state:paused}
+@keyframes galscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.gal-img{
+  width:280px;height:190px;flex-shrink:0;
+  border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--border);
+}
+.gal-img img{width:100%;height:100%;object-fit:cover;transition:.5s;filter:brightness(.75)}
+.gal-img:hover img{transform:scale(1.06);filter:brightness(1)}
+
+/* ── CONTACT ── */
+.contact-bg{background:var(--bg)}
+.contact-grid{
+  display:grid;grid-template-columns:5fr 7fr;
+  gap:4rem;align-items:start;
+}
+.contact-info{display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem}
+.c-item{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1.25rem;background:var(--bg2);
+  border:1px solid var(--border);border-radius:var(--r);
+}
+.c-icon{
+  width:42px;height:42px;flex-shrink:0;
+  background:rgba(201,169,110,.1);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+}
+.c-body label{
+  display:block;font-size:.65rem;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.3rem;
+}
+.c-body a,.c-body span{
+  font-size:.9rem;font-weight:500;color:var(--text);
+  text-decoration:none;
+}
+.c-body a:hover{color:var(--gold)}
+
+/* FORM */
+.form-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r2);padding:2.5rem;
+}
+.form-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1.5rem;color:var(--white);
+  margin-bottom:1.75rem;
+}
+.form-body{display:flex;flex-direction:column;gap:1.25rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:.4rem}
+.fg label{
+  font-size:.7rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);
+}
+.fg input,.fg select,.fg textarea{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:.8rem 1rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:.9rem;color:var(--text);
+  outline:none;transition:.2s;width:100%;
+  -webkit-appearance:none;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:rgba(201,169,110,.5);
+  background:var(--surface);
+}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--muted)}
+.fg textarea{resize:vertical;min-height:110px}
+.fg select option{background:var(--bg3)}
+.submit-btn{
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  background:var(--gold);color:#0D0C0B;
+  font-size:.88rem;font-weight:700;
+  padding:1rem 2rem;border-radius:50px;
+  border:none;cursor:pointer;
+  transition:.2s;letter-spacing:.03em;
+  width:100%;
+}
+.submit-btn:hover{background:var(--gold2);transform:translateY(-2px)}
+.submit-btn svg{width:16px;height:16px;transition:.2s}
+.submit-btn:hover svg{transform:translateX(4px)}
+.form-success{
+  display:none;text-align:center;padding:1rem;
+  background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.25);
+  border-radius:10px;color:var(--gold);
+  font-size:.9rem;font-weight:500;
+}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  padding:3rem 2rem 2rem;
+}
+.footer-inner{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:3rem;padding-bottom:3rem;
+  border-bottom:1px solid var(--border);
+}
+.footer-brand{}
+.footer-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-bottom:1rem}
+.footer-logo-icon{
+  width:32px;height:32px;background:var(--gold);
+  border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:1rem;
+}
+.footer-logo-text{
+  font-family:'DM Serif Display',serif;
+  font-size:1.1rem;color:var(--white);
+}
+.footer-tagline{font-size:.83rem;color:var(--muted);line-height:1.7;max-width:240px;margin-bottom:1.25rem}
+.footer-phone{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(201,169,110,.12);border:1px solid rgba(201,169,110,.2);
+  color:var(--gold);font-size:.82rem;font-weight:600;
+  padding:.45rem 1rem;border-radius:50px;
+  text-decoration:none;transition:.2s;
+}
+.footer-phone:hover{background:rgba(201,169,110,.2)}
+.footer-col h4{
+  font-size:.7rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.25rem;
+}
+.footer-col a{
+  display:block;font-size:.85rem;
+  color:var(--muted2);text-decoration:none;
+  margin-bottom:.6rem;transition:color .2s;
+}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;padding-top:1.75rem;
+}
+.footer-copy{font-size:.78rem;color:var(--muted)}
+.footer-made{font-size:.75rem;color:var(--muted);opacity:.6}
+
+/* ── SCROLL ANIMATIONS ── */
+[data-reveal]{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .65s ease,transform .65s ease;
+}
+[data-reveal].visible{opacity:1;transform:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:3rem;text-align:center}
+  .hero-desc{margin:0 auto 2.5rem}
+  .hero-btns{justify-content:center}
+  .hero-right{display:none}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links,.nav-call{display:none}
+  .burger{display:flex}
+  .sec,.sec-full{padding:4rem 1.25rem}
+  .cats-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .why-visual{display:none}
+  .contact-grid{grid-template-columns:1fr}
+  .locs-grid{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .hero h1{font-size:2.4rem}
+}
+@media(max-width:480px){
+  .hero{padding:5rem 1.25rem 3rem}
+  .cats-grid{border-radius:var(--r)}
+  .footer-inner{grid-template-columns:1fr}
+  .hero-badge{font-size:.65rem}
+  .form-card{padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-brand">
+  
+    <div class="nav-brand-text">
+      Stone & More
+      <small>Lebanon</small>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#products">Products</a>
+    <a href="#locations">Locations</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="tel:03412003" class="nav-call">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 .72h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.36a16 16 0 006.29 6.29l1.43-1.43a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 15.72v1.2z"/></svg>
+    03 412 003
+  </a>
+  <button class="burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" class="m-link">Products</a>
+  <a href="#locations" class="m-link">Locations</a>
+  <a href="#about" class="m-link">About</a>
+  <a href="#contact" class="m-link">Contact</a>
+  <a href="tel:03412003" class="m-call">📞 03 412 003</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">🇱🇧 Premium Materials — Lebanon</div>
+      <h1>Where Stone<br>Meets <em>Modern</em><br>Living</h1>
+      <p class="hero-desc">Stone, terrazzo, fireplaces, BBQ ovens, fire pits, roof tiles & artificial grass. Two showrooms across North Lebanon.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-gold">
+          Explore Products
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn-ghost">Get a Quote</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-icon">🏠</div>
+        <div class="hero-card-title">Complete Home Materials</div>
+        <div class="hero-card-desc">Everything from foundation to finish — stone, roofing, outdoor living, and more.</div>
+        <div class="hero-stats-row">
+          <div class="hero-stat"><span class="n">8+</span><span class="l">Categories</span></div>
+          <div class="hero-stat"><span class="n">20+</span><span class="l">Years Active</span></div>
+          <div class="hero-stat"><span class="n">500+</span><span class="l">Projects</span></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">📍</div>
+        <div class="hero-card-title">Zgharta – Miziara</div>
+        <div class="hero-card-desc">Miziara Road, North Lebanon</div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">📍</div>
+        <div class="hero-card-title">Batroun – Madfoun</div>
+        <div class="hero-card-desc">Batroun Highway, North Lebanon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker">
+    <span class="ticker-item">Natural Stone</span>
+    <span class="ticker-item">Terrazzo</span>
+    <span class="ticker-item">Fireplaces</span>
+    <span class="ticker-item">Wood Stoves</span>
+    <span class="ticker-item">BBQ Ovens</span>
+    <span class="ticker-item">Fire Pits</span>
+    <span class="ticker-item">Roof Tiles</span>
+    <span class="ticker-item">Artificial Grass</span>
+    <span class="ticker-item">Zgharta Showroom</span>
+    <span class="ticker-item">Batroun Showroom</span>
+    <span class="ticker-item">Natural Stone</span>
+    <span class="ticker-item">Terrazzo</span>
+    <span class="ticker-item">Fireplaces</span>
+    <span class="ticker-item">Wood Stoves</span>
+    <span class="ticker-item">BBQ Ovens</span>
+    <span class="ticker-item">Fire Pits</span>
+    <span class="ticker-item">Roof Tiles</span>
+    <span class="ticker-item">Artificial Grass</span>
+    <span class="ticker-item">Zgharta Showroom</span>
+    <span class="ticker-item">Batroun Showroom</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="cats-section" id="products">
+  <div class="sec">
+    <div data-reveal>
+      <div class="sec-tag">What We Offer</div>
+      <h2 class="sec-h">Our <em>Product Range</em></h2>
+      <p class="sec-p">Premium building and finishing materials for every stage of your project — from structure to style.</p>
+    </div>
+    <div class="cats-grid" data-reveal>
+      <div class="cat">
+        <div class="cat-num">01</div>
+        <div class="cat-icon">🪨</div>
+        <div class="cat-name">Natural Stone</div>
+        <p class="cat-desc">Authentic Lebanese and imported stone for cladding, flooring, walls, and facades.</p>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat">
+        <div class="cat-num">02</div>
+        <div class="cat-icon">🟫</div>
+        <div class="cat-name">Terrazzo</div>
+        <p class="cat-desc">Classic and modern terrazzo finishes for elegant interior surfaces.</p>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat">
+        <div class="cat-num">03</div>
+        <div class="cat-icon">🔥</div>
+        <div class="cat-name">Fireplaces & Stoves</div>
+        <p class="cat-desc">Elegant wood-burning fireplaces and stoves for warmth and atmosphere.</p>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat">
+        <div class="cat-num">04</div>
+        <div class="cat-icon">🍖</div>
+        <div class="cat-name">BBQ & Outdoor Ovens</div>
+        <p class="cat-desc">Stone-built BBQs and traditional ovens for the perfect outdoor kitchen.</p>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat">
+        <div class="cat-num">05</div>
+        <div class="cat-icon">🌀</div>
+        <div class="cat-name">Fire Pits</div>
+        <p class="cat-desc">Stylish outdoor fire pits for gathering spaces and garden ambiance.</p>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat">
+        <div class="cat-num">06</div>
+        <div class="cat-icon">🏠</div>
+        <div class="cat-name">Roof Tiles</div>
+        <p class="cat-desc">Durable traditional and modern roof tiles suited to Lebanese architecture.</p>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat" style="grid-column:span 2">
+        <div class="cat-num">07</div>
+        <div class="cat-icon">🌿</div>
+        <div class="cat-name">Artificial Grass</div>
+        <p class="cat-desc" style="max-width:500px">Premium artificial turf for gardens, rooftops, and outdoor areas — low maintenance, year-round green.</p>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat">
+        <div class="cat-num">08</div>
+        <div class="cat-icon">✨</div>
+        <div class="cat-name">Custom Orders</div>
+        <p class="cat-desc">Can't find what you need? We source custom materials for any project.</p>
+        <div class="cat-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-outer">
+  <div class="gallery-label">Project Inspiration</div>
+  <div class="gal-track" id="galTrack">
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=75" alt=""></div>
+    <!-- duplicate -->
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&q=75" alt=""></div>
+    <div class="gal-img"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=75" alt=""></div>
+  </div>
+</div>
+
+<!-- LOCATIONS -->
+<div id="locations" style="background:var(--bg)">
+  <div class="sec">
+    <div data-reveal>
+      <div class="sec-tag">Find Us</div>
+      <h2 class="sec-h">Two <em>Showrooms</em><br>Across Lebanon</h2>
+      <p class="sec-p">Visit us in person to explore our full range. Our team will guide you through every option.</p>
+    </div>
+    <div class="locs-grid" data-reveal>
+      <div class="loc-card">
+        <div class="loc-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26000!2d35.9!3d34.37!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1521f7478ca4d3df%3A0x23a3bbea823f9359!2sStone%20and%20More!5e0!3m2!1sen!2slb!4v1680000000001" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="loc-body">
+          <span class="loc-tag">Showroom 01</span>
+          <div class="loc-name">Zgharta – Miziara</div>
+          <div class="loc-addr">Miziara Road, North Lebanon<br>Open 7 days a week</div>
+          <a href="https://maps.app.goo.gl/stone-and-more" class="loc-link" target="_blank">Get Directions →</a>
+        </div>
+      </div>
+      <div class="loc-card">
+        <div class="loc-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26000!2d35.65!3d34.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1521f7478ca4d3df%3A0x23a3bbea823f9359!2sStone%20and%20More!5e0!3m2!1sen!2slb!4v1680000000002" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="loc-body">
+          <span class="loc-tag">Showroom 02</span>
+          <div class="loc-name">Batroun – Madfoun</div>
+          <div class="loc-addr">Batroun Highway, North Lebanon<br>Open 7 days a week</div>
+          <a href="https://maps.app.goo.gl/stone-and-more" class="loc-link" target="_blank">Get Directions →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY -->
+<div class="why-bg" id="about">
+  <div class="sec">
+    <div class="why-grid">
+      <div data-reveal>
+        <div class="sec-tag">Why Stone & More</div>
+        <h2 class="sec-h">Built on<br><em>Trust & Quality</em></h2>
+        <p class="sec-p" style="margin-bottom:0">Two decades of serving Lebanese homes and contractors with premium materials and honest expertise.</p>
+        <div class="feat-list">
+          <div class="feat">
+            <div class="feat-icon">🏔️</div>
+            <div class="feat-body">
+              <div class="feat-title">Premium Sourcing</div>
+              <p class="feat-desc">Carefully selected stone and materials from top suppliers in Lebanon and abroad.</p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="feat-icon">🤝</div>
+            <div class="feat-body">
+              <div class="feat-title">Expert Guidance</div>
+              <p class="feat-desc">Our team works with architects, contractors, and homeowners to find the perfect match.</p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="feat-icon">📦</div>
+            <div class="feat-body">
+              <div class="feat-title">One-Stop Shop</div>
+              <p class="feat-desc">Stone, outdoor living, roofing, and landscaping — all under one roof, two locations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual" data-reveal>
+        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=700&q=80" alt="Showroom interior">
+        <div class="why-visual-chip">
+          <div class="why-chip-icon">📞</div>
+          <div class="why-chip-text">
+            <strong>Ready to help</strong>
+            <span>Call us: <a href="tel:03412003" style="color:var(--gold);text-decoration:none">03 412 003</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-bg" id="contact">
+  <div class="sec">
+    <div data-reveal>
+      <div class="sec-tag">Contact</div>
+      <h2 class="sec-h">Start Your <em>Project</em></h2>
+    </div>
+    <div class="contact-grid" data-reveal>
+      <div>
+        <p class="sec-p">Reach out for a quote, visit a showroom, or just ask a question. We're here to help.</p>
+        <div class="contact-info">
+          <div class="c-item">
+            <div class="c-icon">📞</div>
+            <div class="c-body">
+              <label>Phone</label>
+              <a href="tel:03412003">03 412 003</a>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">📍</div>
+            <div class="c-body">
+              <label>Showroom 1</label>
+              <span>Zgharta – Miziara Road, North Lebanon</span>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">📍</div>
+            <div class="c-body">
+              <label>Showroom 2</label>
+              <span>Batroun Highway – Madfoun, North Lebanon</span>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">🕐</div>
+            <div class="c-body">
+              <label>Hours</label>
+              <span>Open 7 days a week</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-title">Send us a message</div>
+        <form class="form-body" onsubmit="handleForm(event)">
+          <div class="frow">
+            <div class="fg">
+              <label>Your Name</label>
+              <input type="text" placeholder="Full name" required>
+            </div>
+            <div class="fg">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="+961 xx xxx xxx">
+            </div>
+          </div>
+          <div class="fg">
+            <label>Product Interest</label>
+            <select>
+              <option value="">Select a category...</option>
+              <option>Natural Stone</option>
+              <option>Terrazzo</option>
+              <option>Fireplaces & Stoves</option>
+              <option>BBQ & Outdoor Ovens</option>
+              <option>Fire Pits</option>
+              <option>Roof Tiles</option>
+              <option>Artificial Grass</option>
+              <option>Multiple / Other</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Message</label>
+            <textarea placeholder="Tell us about your project..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">
+            Send Inquiry
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <div class="form-success" id="formSuccess">✓ Message sent! We'll be in touch soon.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">
+        <div class="footer-logo-icon">🪨</div>
+        <div class="footer-logo-text">Stone & More</div>
+      </a>
+      <p class="footer-tagline">Premium building materials for Lebanese homes. Two showrooms, two decades of trust.</p>
+      <a href="tel:03412003" class="footer-phone">📞 03 412 003</a>
+    </div>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <a href="#products">Natural Stone</a>
+      <a href="#products">Terrazzo</a>
+      <a href="#products">Fireplaces</a>
+      <a href="#products">BBQ & Ovens</a>
+      <a href="#products">Roof Tiles</a>
+      <a href="#products">Artificial Grass</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#about">About Us</a>
+      <a href="#locations">Our Locations</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Showrooms</h4>
+      <a href="#">Zgharta – Miziara Road</a>
+      <a href="#">Batroun – Madfoun</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Stone & More Lebanon. All rights reserved.</span>
+    <span class="footer-made">Designed for Stone & More</span>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>60);
+});
+
+// Burger
+const burger=document.getElementById('burger');
+const mobileMenu=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{
+  burger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';
+});
+document.querySelectorAll('.m-link,.m-call').forEach(a=>{
+  a.addEventListener('click',()=>{
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow='';
+  });
+});
+
+// Form
+function handleForm(e){
+  e.preventDefault();
+  const s=document.getElementById('formSuccess');
+  s.style.display='block';
+  e.target.reset();
+  setTimeout(()=>s.style.display='none',5000);
+}
+
+// Reveal on scroll
+const reveals=document.querySelectorAll('[data-reveal]');
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach((entry,i)=>{
+    if(entry.isIntersecting){
+      setTimeout(()=>entry.target.classList.add('visible'),i*80);
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.12});
+reveals.forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
