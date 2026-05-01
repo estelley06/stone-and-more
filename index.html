@@ -4,941 +4,807 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stone & More — Lebanon</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0D0C0B;
-  --bg2:#141210;
-  --bg3:#1C1916;
-  --surface:#232019;
-  --border:rgba(255,255,255,0.06);
-  --border2:rgba(255,255,255,0.12);
-  --gold:#C9A96E;
-  --gold2:#E8C98A;
-  --terra:#C1533A;
-  --terra2:#D96B50;
-  --text:#F0EDE8;
-  --muted:#8A8278;
-  --muted2:#B0A99F;
-  --white:#FEFCF9;
-  --r:16px;
-  --r2:24px;
+  --bg:#0D0C0B;--bg2:#141210;--bg3:#1C1916;--surface:#232019;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --gold:#C9A96E;--gold2:#E8C98A;--gold-dim:rgba(201,169,110,0.12);
+  --terra:#C1533A;--terra2:#D96B50;
+  --text:#F0EDE8;--muted:#8A8278;--muted2:#B0A99F;--white:#FEFCF9;
+  --r:14px;--r2:20px;--r3:28px;
+  --success:#4CAF50;--danger:#E53935;
 }
-html{scroll-behavior:smooth;font-size:16px}
+html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold)}
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
-
-/* ── NAV ── */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 2rem;
-  background:rgba(13,12,11,0.8);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  transition:padding .3s;
-}
-.nav.scrolled{padding:.7rem 2rem}
-.nav-brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
-.nav-brand-icon{
-  width:36px;height:36px;
-  background:var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  border-radius:8px;
-  font-size:1.1rem;
-  flex-shrink:0;
-}
-.nav-brand-text{
-  font-family:'DM Serif Display',serif;
-  font-size:1.15rem;color:var(--white);
-  line-height:1.1;
-}
-.nav-brand-text small{
-  display:block;font-family:'DM Sans',sans-serif;
-  font-size:.6rem;font-weight:500;
-  letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold);
-}
-.nav-links{display:flex;align-items:center;gap:.25rem}
-.nav-links a{
-  font-size:.82rem;font-weight:500;
-  letter-spacing:.04em;
-  color:var(--muted2);text-decoration:none;
-  padding:.5rem .9rem;
-  border-radius:8px;
-  transition:color .2s,background .2s;
-}
-.nav-links a:hover{color:var(--white);background:rgba(255,255,255,.05)}
-.nav-call{
-  display:flex;align-items:center;gap:.5rem;
-  background:var(--gold);color:#0D0C0B;
-  font-size:.8rem;font-weight:600;
-  padding:.55rem 1.2rem;
-  border-radius:50px;text-decoration:none;
-  transition:background .2s,transform .15s;
-  white-space:nowrap;
-}
-.nav-call:hover{background:var(--gold2);transform:scale(1.03)}
-.nav-call svg{width:14px;height:14px;flex-shrink:0}
-.burger{
-  display:none;flex-direction:column;gap:5px;
-  cursor:pointer;padding:.4rem;border:none;background:none;
-}
+/* ═══ NAV ═══ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(13,12,11,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:.3s}
+.nav-left{display:flex;align-items:center;gap:1rem}
+.nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;cursor:pointer}
+.nav-logo img{height:36px;width:auto;object-fit:contain}
+.nav-center{display:flex;gap:.25rem}
+.nav-center a{font-size:.82rem;font-weight:500;color:var(--muted2);text-decoration:none;padding:.45rem .85rem;border-radius:8px;transition:.2s;cursor:pointer}
+.nav-center a:hover{color:var(--white);background:rgba(255,255,255,.05)}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.nav-cart{position:relative;display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border2);color:var(--text);font-size:.82rem;font-weight:600;padding:.5rem 1rem;border-radius:50px;cursor:pointer;transition:.2s}
+.nav-cart:hover{border-color:var(--gold);color:var(--gold)}
+.cart-badge{position:absolute;top:-6px;right:-6px;background:var(--terra);color:#fff;font-size:.6rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;display:none}
+.nav-call{display:flex;align-items:center;gap:.5rem;background:var(--gold);color:#0D0C0B;font-size:.8rem;font-weight:700;padding:.5rem 1.2rem;border-radius:50px;text-decoration:none;transition:.2s}
+.nav-call:hover{background:var(--gold2)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:.4rem}
 .burger span{display:block;width:22px;height:1.5px;background:var(--text);transition:.3s;border-radius:2px}
 .burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .burger.open span:nth-child(2){opacity:0}
 .burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mobile-menu{
-  display:none;position:fixed;inset:0;top:65px;z-index:199;
-  background:rgba(13,12,11,.97);backdrop-filter:blur(20px);
-  flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-  padding:2rem;
-}
+
+/* ═══ MOBILE MENU ═══ */
+.mobile-menu{display:none;position:fixed;inset:0;top:65px;z-index:499;background:rgba(13,12,11,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:1.75rem;padding:2rem}
 .mobile-menu.open{display:flex}
-.mobile-menu a{
-  font-family:'DM Serif Display',serif;
-  font-size:2.2rem;color:var(--text);text-decoration:none;
-  transition:color .2s;
-}
+.mobile-menu a{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text);text-decoration:none;cursor:pointer}
 .mobile-menu a:hover{color:var(--gold)}
-.mobile-menu .m-call{
-  margin-top:1rem;
-  background:var(--gold);color:#0D0C0B;
-  font-family:'DM Sans',sans-serif;
-  font-size:1rem;font-weight:600;
-  padding:.9rem 2.5rem;border-radius:50px;
-  text-decoration:none;
-}
+.mobile-menu .m-call{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;background:var(--gold);color:#0D0C0B;padding:.85rem 2rem;border-radius:50px;text-decoration:none}
 
-/* ── HERO ── */
-.hero{
-  min-height:100svh;
-  display:grid;place-items:center;
-  position:relative;overflow:hidden;
-  padding:6rem 2rem 4rem;
-}
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85') center/cover no-repeat;
-}
-.hero-bg::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(13,12,11,.97) 0%,rgba(13,12,11,.85) 50%,rgba(13,12,11,.6) 100%);
-}
-.hero-inner{
-  position:relative;z-index:1;
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:3rem;align-items:center;
-  max-width:1200px;width:100%;margin:0 auto;
-}
-.hero-left{}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:rgba(201,169,110,.12);
-  border:1px solid rgba(201,169,110,.25);
-  color:var(--gold);
-  font-size:.72rem;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase;
-  padding:.4rem 1rem;border-radius:50px;
-  margin-bottom:1.75rem;
-}
-.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(2.6rem,5.5vw,4.5rem);
-  line-height:1.05;
-  letter-spacing:-.02em;
-  margin-bottom:1.5rem;
-  color:var(--white);
-}
+/* ═══ PAGES ═══ */
+.page{display:none;min-height:100vh;padding-top:65px}
+.page.active{display:block}
+
+/* ═══ HERO ═══ */
+.hero{min-height:100svh;display:flex;align-items:center;position:relative;overflow:hidden;padding:6rem 4rem 4rem}
+.hero-bg{position:absolute;inset:0;overflow:hidden;background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85') center/cover no-repeat}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,12,11,.97) 0%,rgba(13,12,11,.8) 60%,rgba(13,12,11,.5) 100%)}
+.hero-bg::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 40%);z-index:1}
+.hero-content{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1fr 360px;gap:2.5rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold-dim);border:1px solid rgba(201,169,110,.25);color:var(--gold);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.4rem 1rem;border-radius:50px;margin-bottom:1.5rem}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5.5vw,4.8rem);line-height:1.02;letter-spacing:-.02em;color:var(--white);margin-bottom:1.5rem}
 .hero h1 em{font-style:italic;color:var(--gold)}
-.hero-desc{
-  font-size:1rem;font-weight:300;line-height:1.75;
-  color:var(--muted2);max-width:440px;
-  margin-bottom:2.5rem;
-}
+.hero-desc{font-size:.95rem;font-weight:300;line-height:1.8;color:var(--muted2);max-width:440px;margin-bottom:2.5rem}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-gold{
-  display:inline-flex;align-items:center;gap:.6rem;
-  background:var(--gold);color:#0D0C0B;
-  font-size:.85rem;font-weight:600;
-  padding:.85rem 2rem;border-radius:50px;
-  text-decoration:none;transition:.2s;
-  white-space:nowrap;
-}
+.btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#0D0C0B;font-size:.85rem;font-weight:700;padding:.85rem 2rem;border-radius:50px;text-decoration:none;border:none;cursor:pointer;transition:.2s}
 .btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:.6rem;
-  border:1px solid var(--border2);color:var(--text);
-  font-size:.85rem;font-weight:500;
-  padding:.85rem 2rem;border-radius:50px;
-  text-decoration:none;transition:.2s;
-  white-space:nowrap;
-}
+.btn-ghost{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--border2);color:var(--text);font-size:.85rem;font-weight:500;padding:.85rem 2rem;border-radius:50px;text-decoration:none;background:none;cursor:pointer;transition:.2s}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.hero-right{
-  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
-}
-.hero-card{
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--border);
-  border-radius:var(--r2);
-  padding:1.5rem;
-  backdrop-filter:blur(10px);
-  transition:border-color .3s,background .3s;
-}
-.hero-card:hover{border-color:rgba(201,169,110,.3);background:rgba(255,255,255,.06)}
-.hero-card:first-child{grid-column:span 2}
-.hero-card-icon{font-size:1.6rem;margin-bottom:.75rem}
-.hero-card-title{
-  font-family:'DM Serif Display',serif;
-  font-size:1rem;color:var(--white);
-  margin-bottom:.3rem;
-}
-.hero-card-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
-.hero-stats-row{
-  display:flex;gap:2rem;margin-top:1rem;
-  padding-top:1rem;border-top:1px solid var(--border);
-}
-.hero-stat .n{
-  font-family:'DM Serif Display',serif;
-  font-size:1.5rem;color:var(--gold);display:block;
-}
-.hero-stat .l{font-size:.7rem;color:var(--muted);letter-spacing:.08em}
+.hero-right{display:flex;flex-direction:column;gap:.85rem;width:360px;flex-shrink:0;overflow:hidden}
+.hero-stat-card{background:rgba(30,27,22,.75);border:1px solid rgba(255,255,255,.1);border-radius:var(--r2);padding:1.5rem;backdrop-filter:blur(16px);width:100%;box-sizing:border-box}
+.hero-card-icon{font-size:1.6rem;margin-bottom:.75rem;display:block}
+.hero-card-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--white);margin-bottom:.4rem}
+.hero-card-desc{font-size:.82rem;color:var(--muted2);line-height:1.65;margin-bottom:1.25rem}
+.hero-stats-row{display:flex;gap:2rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.08)}
+.hs .n{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--gold);display:block;line-height:1}
+.hs .l{font-size:.68rem;color:var(--muted);letter-spacing:.08em;margin-top:.2rem;display:block}
+.hero-locs{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;width:100%;box-sizing:border-box}
+.hero-loc-card{background:rgba(30,27,22,.75);border:1px solid rgba(255,255,255,.1);border-radius:var(--r2);padding:1.25rem;backdrop-filter:blur(16px);min-width:0;overflow:hidden;box-sizing:border-box}
+.hero-loc-pin{font-size:1.2rem;margin-bottom:.5rem;display:block}
+.hero-loc-name{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--white);margin-bottom:.25rem}
+.hero-loc-addr{font-size:.72rem;color:var(--muted2);line-height:1.4}
 
-/* ── TICKER ── */
-.ticker{
-  overflow:hidden;
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  background:var(--bg2);
-  padding:.75rem 0;
-}
-.ticker-track{
-  display:flex;gap:0;
-  animation:ticker 25s linear infinite;
-  width:max-content;
-}
+/* ═══ TICKER ═══ */
+.ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);padding:.7rem 0}
+.ticker-track{display:flex;animation:tick 28s linear infinite;width:max-content}
 .ticker-track:hover{animation-play-state:paused}
-.ticker-item{
-  font-family:'DM Sans',sans-serif;
-  font-size:.75rem;font-weight:500;
-  letter-spacing:.12em;text-transform:uppercase;
-  color:var(--muted);padding:0 2.5rem;
-  display:flex;align-items:center;gap:1rem;
-  white-space:nowrap;
-}
-.ticker-item::after{content:'✦';color:var(--gold);font-size:.5rem}
-@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 2rem;display:flex;align-items:center;gap:.75rem;white-space:nowrap}
+.ticker-item::after{content:'◆';color:var(--gold);font-size:.4rem}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* ── SECTION ── */
-.sec{padding:6rem 2rem;max-width:1200px;margin:0 auto}
-.sec-full{padding:6rem 2rem}
-.sec-tag{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-size:.7rem;font-weight:600;
-  letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:1.25rem;
-}
-.sec-tag::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
-.sec-h{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(2rem,4vw,3.2rem);
-  line-height:1.1;letter-spacing:-.02em;
-  color:var(--white);margin-bottom:1rem;
-}
+/* ═══ SECTION ═══ */
+.sec{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.sec-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.sec-tag::before{content:'';width:20px;height:1px;background:var(--gold);display:block}
+.sec-h{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.1;color:var(--white);margin-bottom:.75rem}
 .sec-h em{font-style:italic;color:var(--gold)}
-.sec-p{font-size:.95rem;line-height:1.8;color:var(--muted2);max-width:520px}
+.sec-p{font-size:.9rem;line-height:1.8;color:var(--muted2);max-width:500px}
 
-/* ── CATEGORIES ── */
-.cats-section{background:var(--bg2)}
-.cats-section .sec{padding:6rem 2rem}
-.cats-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:var(--border);
-  border-radius:var(--r2);
-  overflow:hidden;
-  margin-top:3.5rem;
-}
-.cat{
-  background:var(--bg);
-  padding:2rem;
-  display:flex;flex-direction:column;gap:.75rem;
-  transition:background .3s;
-  cursor:default;
-  position:relative;
-  overflow:hidden;
-}
-.cat::after{
-  content:'';position:absolute;
-  bottom:0;left:0;right:0;height:2px;
-  background:var(--gold);transform:scaleX(0);
-  transition:transform .3s;transform-origin:left;
-}
-.cat:hover{background:var(--surface)}
-.cat:hover::after{transform:scaleX(1)}
-.cat-num{
-  font-size:.65rem;font-weight:600;
-  letter-spacing:.18em;color:var(--muted);
-  text-transform:uppercase;
-}
-.cat-icon{font-size:2rem;line-height:1}
-.cat-name{
-  font-family:'DM Serif Display',serif;
-  font-size:1.2rem;color:var(--white);
-  line-height:1.2;
-}
-.cat-desc{font-size:.82rem;line-height:1.65;color:var(--muted);flex:1}
-.cat-arrow{
-  display:inline-flex;width:32px;height:32px;
-  border:1px solid var(--border2);border-radius:50%;
-  align-items:center;justify-content:center;
-  color:var(--muted);font-size:.8rem;
-  margin-top:.5rem;transition:.2s;
-  align-self:flex-start;
-}
-.cat:hover .cat-arrow{border-color:var(--gold);color:var(--gold)}
+/* ═══ CATEGORIES PAGE ═══ */
+.cats-page{background:var(--bg)}
+.cats-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:2rem}
+.cats-header-inner{max-width:1200px;margin:0 auto}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--muted);margin-bottom:1rem;flex-wrap:wrap}
+.breadcrumb span{color:var(--muted)}
+.breadcrumb a{color:var(--gold);cursor:pointer;text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.cats-header h2{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--white)}
+.cats-header p{font-size:.88rem;color:var(--muted2);margin-top:.3rem}
 
-/* ── LOCATIONS ── */
-.locs-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
-  margin-top:3rem;
-}
-.loc-card{
-  border:1px solid var(--border);
-  border-radius:var(--r2);
-  overflow:hidden;
-  transition:border-color .3s;
-}
-.loc-card:hover{border-color:rgba(201,169,110,.3)}
-.loc-map{height:200px;background:var(--surface);overflow:hidden}
-.loc-map iframe{width:100%;height:100%;border:none;filter:grayscale(.4)contrast(1.1)brightness(.8)}
-.loc-body{padding:1.5rem}
-.loc-tag{
-  font-size:.65rem;font-weight:600;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--gold);
-  margin-bottom:.75rem;display:block;
-}
-.loc-name{
-  font-family:'DM Serif Display',serif;
-  font-size:1.25rem;color:var(--white);
-  margin-bottom:.4rem;
-}
-.loc-addr{font-size:.85rem;color:var(--muted2);line-height:1.6}
-.loc-link{
-  display:inline-flex;align-items:center;gap:.4rem;
-  margin-top:1rem;font-size:.8rem;font-weight:500;
-  color:var(--gold);text-decoration:none;
-  transition:gap .2s;
-}
-.loc-link:hover{gap:.7rem}
+/* main categories grid */
+.main-cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;padding:2rem;max-width:1200px;margin:0 auto}
+.main-cat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;cursor:pointer;transition:.3s;group}
+.main-cat-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.main-cat-img{height:180px;overflow:hidden;position:relative;background:var(--surface)}
+.main-cat-img img{width:100%;height:100%;object-fit:cover;transition:.5s;filter:brightness(.7)}
+.main-cat-card:hover .main-cat-img img{transform:scale(1.06);filter:brightness(.9)}
+.main-cat-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,12,11,.8) 0%,transparent 60%)}
+.main-cat-body{padding:1.5rem}
+.main-cat-icon{font-size:1.6rem;margin-bottom:.75rem;display:block}
+.main-cat-name{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--white);margin-bottom:.4rem}
+.main-cat-count{font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:.4rem}
+.main-cat-count::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold);display:inline-block}
+.main-cat-arrow{display:flex;align-items:center;justify-content:space-between;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.main-cat-arrow span{font-size:.75rem;font-weight:600;color:var(--gold);letter-spacing:.08em}
+.main-cat-arrow svg{color:var(--gold);transition:.2s}
+.main-cat-card:hover .main-cat-arrow svg{transform:translateX(4px)}
 
-/* ── WHY ── */
-.why-bg{background:var(--bg3)}
-.why-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:4rem;align-items:center;
-}
-.feat-list{display:flex;flex-direction:column;gap:1rem;margin-top:2.5rem}
-.feat{
-  display:flex;gap:1.25rem;align-items:flex-start;
-  padding:1.25rem;
-  border:1px solid var(--border);
-  border-radius:var(--r);
-  background:var(--bg2);
-  transition:.3s;
-}
-.feat:hover{border-color:rgba(201,169,110,.25);background:var(--surface)}
-.feat-icon{
-  width:44px;height:44px;flex-shrink:0;
-  background:rgba(201,169,110,.1);
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;
-}
-.feat-body{}
-.feat-title{
-  font-family:'DM Serif Display',serif;
-  font-size:1rem;color:var(--white);margin-bottom:.3rem;
-}
-.feat-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
-.why-visual{
-  position:relative;
-  border-radius:var(--r2);overflow:hidden;
-}
-.why-visual img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
-.why-visual-chip{
-  position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;
-  background:rgba(13,12,11,.85);
-  backdrop-filter:blur(16px);
-  border:1px solid var(--border2);
-  border-radius:var(--r);
-  padding:1.25rem;
-  display:flex;align-items:center;gap:1rem;
-}
-.why-chip-icon{
-  width:44px;height:44px;flex-shrink:0;
-  background:var(--terra);border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;
-}
-.why-chip-text strong{display:block;font-size:.95rem;color:var(--white);margin-bottom:.15rem}
-.why-chip-text span{font-size:.78rem;color:var(--muted2)}
+/* subcategories */
+.subcats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;padding:2rem;max-width:1200px;margin:0 auto}
+.subcat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem;cursor:pointer;transition:.3s;display:flex;flex-direction:column;gap:.75rem}
+.subcat-card:hover{border-color:rgba(201,169,110,.3);background:var(--surface);transform:translateY(-3px)}
+.subcat-icon{font-size:1.4rem}
+.subcat-name{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--white)}
+.subcat-count{font-size:.72rem;color:var(--muted)}
+.subcat-arrow{color:var(--gold);font-size:.8rem;margin-top:auto}
 
-/* ── GALLERY ── */
-.gallery-outer{background:var(--bg2);padding:4rem 0;overflow:hidden}
-.gallery-label{
-  font-size:.7rem;font-weight:600;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);
-  text-align:center;margin-bottom:2rem;
-  display:flex;align-items:center;justify-content:center;gap:1rem;
-}
-.gallery-label::before,.gallery-label::after{content:'';flex:1;max-width:80px;height:1px;background:var(--border2)}
+/* products grid */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem;padding:2rem;max-width:1200px;margin:0 auto}
+.product-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;transition:.3s;display:flex;flex-direction:column}
+.product-card:hover{border-color:rgba(201,169,110,.2);transform:translateY(-3px);box-shadow:0 16px 32px rgba(0,0,0,.25)}
+.product-img{height:200px;overflow:hidden;position:relative;background:var(--surface)}
+.product-img img{width:100%;height:100%;object-fit:cover;transition:.5s;filter:brightness(.8)}
+.product-card:hover .product-img img{transform:scale(1.05);filter:brightness(1)}
+.product-unavailable-badge{position:absolute;top:.75rem;left:.75rem;background:rgba(229,57,53,.9);color:#fff;font-size:.65rem;font-weight:700;padding:.25rem .6rem;border-radius:50px;letter-spacing:.08em;text-transform:uppercase}
+.product-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;gap:.5rem}
+.product-cat-tag{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.product-name{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--white);line-height:1.3}
+.product-desc{font-size:.78rem;color:var(--muted);line-height:1.6;flex:1}
+.product-price{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:'DM Serif Display',serif}
+.product-price small{font-family:'DM Sans',sans-serif;font-size:.7rem;font-weight:400;color:var(--muted)}
+.product-footer{padding:0 1.25rem 1.25rem;display:flex;gap:.5rem}
+.add-to-cart-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:.4rem;background:var(--gold);color:#0D0C0B;font-size:.8rem;font-weight:700;padding:.7rem 1rem;border-radius:50px;border:none;cursor:pointer;transition:.2s}
+.add-to-cart-btn:hover{background:var(--gold2)}
+.add-to-cart-btn.added{background:var(--success);color:#fff}
+.add-to-cart-btn:disabled{background:var(--surface);color:var(--muted);cursor:not-allowed}
+
+/* ═══ CART DRAWER ═══ */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:800;opacity:0;pointer-events:none;transition:.3s;backdrop-filter:blur(4px)}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:100vw;background:var(--bg2);border-left:1px solid var(--border);z-index:801;transform:translateX(100%);transition:.35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cart-head h3{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white)}
+.cart-close{background:none;border:1px solid var(--border);color:var(--muted2);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+.cart-close:hover{border-color:var(--gold);color:var(--gold)}
+.cart-items{flex:1;overflow-y:auto;padding:1.25rem}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:1rem;color:var(--muted)}
+.cart-empty svg{opacity:.3}
+.cart-item{display:flex;gap:1rem;padding:1rem;background:var(--surface);border-radius:var(--r);margin-bottom:.75rem;border:1px solid var(--border)}
+.cart-item-img{width:60px;height:60px;border-radius:10px;overflow:hidden;flex-shrink:0;background:var(--bg3)}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-size:.88rem;font-weight:600;color:var(--white);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cart-item-cat{font-size:.7rem;color:var(--gold);margin-top:.1rem}
+.cart-item-price{font-size:.9rem;font-weight:700;color:var(--gold);margin-top:.4rem}
+.cart-item-price small{font-size:.7rem;font-weight:400;color:var(--muted)}
+.cart-item-controls{display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+.qty-controls{display:flex;align-items:center;gap:.4rem}
+.qty-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--border2);background:none;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:.2s}
+.qty-btn:hover{border-color:var(--gold);color:var(--gold)}
+.qty-num{font-size:.85rem;font-weight:600;color:var(--white);min-width:20px;text-align:center}
+.remove-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem;transition:.2s}
+.remove-btn:hover{color:var(--danger)}
+.cart-footer{padding:1.5rem;border-top:1px solid var(--border)}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.cart-total-label{font-size:.85rem;color:var(--muted2)}
+.cart-total-amount{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--gold)}
+.cart-note{font-size:.75rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;background:var(--gold-dim);border:1px solid rgba(201,169,110,.15);border-radius:10px;padding:.75rem;display:flex;gap:.5rem}
+.whatsapp-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:.75rem;background:#25D366;color:#fff;font-size:.95rem;font-weight:700;padding:1.1rem;border-radius:50px;border:none;cursor:pointer;transition:.2s}
+.whatsapp-btn:hover{background:#22c55e;transform:translateY(-2px)}
+.whatsapp-btn svg{width:20px;height:20px}
+.clear-cart-btn{width:100%;margin-top:.75rem;background:none;border:1px solid var(--border);color:var(--muted);font-size:.78rem;padding:.6rem;border-radius:50px;cursor:pointer;transition:.2s}
+.clear-cart-btn:hover{border-color:var(--danger);color:var(--danger)}
+
+/* ═══ GALLERY STRIP ═══ */
+.gal-outer{overflow:hidden;padding:3rem 0;background:var(--bg2);border-top:1px solid var(--border)}
+.gal-label{text-align:center;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;display:flex;align-items:center;justify-content:center;gap:1rem}
+.gal-label::before,.gal-label::after{content:'';width:60px;height:1px;background:var(--border2)}
 .gal-track{display:flex;gap:1rem;animation:galscroll 35s linear infinite;width:max-content}
 .gal-track:hover{animation-play-state:paused}
 @keyframes galscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.gal-img{
-  width:280px;height:190px;flex-shrink:0;
-  border-radius:var(--r);overflow:hidden;
-  border:1px solid var(--border);
-}
-.gal-img img{width:100%;height:100%;object-fit:cover;transition:.5s;filter:brightness(.75)}
-.gal-img:hover img{transform:scale(1.06);filter:brightness(1)}
+.gal-img{width:260px;height:175px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);flex-shrink:0}
+.gal-img img{width:100%;height:100%;object-fit:cover;transition:.5s;filter:brightness(.7)}
+.gal-img:hover img{transform:scale(1.05);filter:brightness(1)}
 
-/* ── CONTACT ── */
-.contact-bg{background:var(--bg)}
-.contact-grid{
-  display:grid;grid-template-columns:5fr 7fr;
-  gap:4rem;align-items:start;
-}
-.contact-info{display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem}
-.c-item{
-  display:flex;align-items:flex-start;gap:1rem;
-  padding:1.25rem;background:var(--bg2);
-  border:1px solid var(--border);border-radius:var(--r);
-}
-.c-icon{
-  width:42px;height:42px;flex-shrink:0;
-  background:rgba(201,169,110,.1);border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;
-}
-.c-body label{
-  display:block;font-size:.65rem;font-weight:600;
-  letter-spacing:.15em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:.3rem;
-}
-.c-body a,.c-body span{
-  font-size:.9rem;font-weight:500;color:var(--text);
-  text-decoration:none;
-}
+/* ═══ CONTACT PAGE ═══ */
+.contact-page{background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start}
+.c-items{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+.c-item{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r)}
+.c-icon{width:42px;height:42px;flex-shrink:0;background:var(--gold-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.c-body label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.c-body a,.c-body span{font-size:.9rem;font-weight:500;color:var(--text);text-decoration:none}
 .c-body a:hover{color:var(--gold)}
-
-/* FORM */
-.form-card{
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:var(--r2);padding:2.5rem;
-}
-.form-title{
-  font-family:'DM Serif Display',serif;
-  font-size:1.5rem;color:var(--white);
-  margin-bottom:1.75rem;
-}
-.form-body{display:flex;flex-direction:column;gap:1.25rem}
+.form-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:2rem}
+.form-card h3{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:1.5rem}
+.form-body{display:flex;flex-direction:column;gap:1.1rem}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .fg{display:flex;flex-direction:column;gap:.4rem}
-.fg label{
-  font-size:.7rem;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted);
-}
-.fg input,.fg select,.fg textarea{
-  background:var(--bg3);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:.8rem 1rem;
-  font-family:'DM Sans',sans-serif;
-  font-size:.9rem;color:var(--text);
-  outline:none;transition:.2s;width:100%;
-  -webkit-appearance:none;
-}
-.fg input:focus,.fg select:focus,.fg textarea:focus{
-  border-color:rgba(201,169,110,.5);
-  background:var(--surface);
-}
+.fg label{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fg input,.fg select,.fg textarea{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--text);outline:none;transition:.2s;width:100%;-webkit-appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(201,169,110,.5)}
 .fg input::placeholder,.fg textarea::placeholder{color:var(--muted)}
-.fg textarea{resize:vertical;min-height:110px}
+.fg textarea{resize:vertical;min-height:100px}
 .fg select option{background:var(--bg3)}
-.submit-btn{
-  display:flex;align-items:center;justify-content:center;gap:.6rem;
-  background:var(--gold);color:#0D0C0B;
-  font-size:.88rem;font-weight:700;
-  padding:1rem 2rem;border-radius:50px;
-  border:none;cursor:pointer;
-  transition:.2s;letter-spacing:.03em;
-  width:100%;
-}
+.submit-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--gold);color:#0D0C0B;font-size:.88rem;font-weight:700;padding:1rem;border-radius:50px;border:none;cursor:pointer;transition:.2s;width:100%}
 .submit-btn:hover{background:var(--gold2);transform:translateY(-2px)}
-.submit-btn svg{width:16px;height:16px;transition:.2s}
-.submit-btn:hover svg{transform:translateX(4px)}
-.form-success{
-  display:none;text-align:center;padding:1rem;
-  background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.25);
-  border-radius:10px;color:var(--gold);
-  font-size:.9rem;font-weight:500;
-}
+.form-success{display:none;text-align:center;padding:1rem;background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.3);border-radius:10px;color:#4CAF50;font-size:.88rem;font-weight:500;margin-top:.75rem}
 
-/* ── FOOTER ── */
-.footer{
-  background:var(--bg);
-  border-top:1px solid var(--border);
-  padding:3rem 2rem 2rem;
-}
-.footer-inner{
-  max-width:1200px;margin:0 auto;
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
-  gap:3rem;padding-bottom:3rem;
-  border-bottom:1px solid var(--border);
-}
+/* ═══ ABOUT PAGE ═══ */
+.about-page{background:var(--bg)}
+.about-hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:4rem 2rem}
+.about-hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-img{border-radius:var(--r2);overflow:hidden;aspect-ratio:4/3}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.about-feat{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;transition:.3s}
+.about-feat:hover{border-color:rgba(201,169,110,.25)}
+.about-feat-icon{font-size:1.4rem;margin-bottom:.5rem;display:block}
+.about-feat-title{font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:.3rem}
+.about-feat-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+.locations-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.loc-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;transition:.3s}
+.loc-card:hover{border-color:rgba(201,169,110,.25)}
+.loc-map{height:180px}
+.loc-map iframe{width:100%;height:100%;border:none;filter:grayscale(.4)}
+.loc-body{padding:1.25rem}
+.loc-tag{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:block}
+.loc-name{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--white);margin-bottom:.3rem}
+.loc-addr{font-size:.82rem;color:var(--muted2);line-height:1.6}
+.loc-link{display:inline-flex;align-items:center;gap:.3rem;margin-top:.75rem;font-size:.78rem;font-weight:500;color:var(--gold);text-decoration:none;transition:.2s}
+.loc-link:hover{gap:.6rem}
+
+/* ═══ ADMIN PANEL ═══ */
+.admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+.admin-overlay.open{display:flex}
+.admin-login{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:2.5rem;width:380px;max-width:90vw;text-align:center}
+.admin-login h2{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--white);margin-bottom:.5rem}
+.admin-login p{font-size:.85rem;color:var(--muted);margin-bottom:2rem}
+.admin-login input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:.85rem 1rem;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--text);outline:none;transition:.2s;margin-bottom:1rem}
+.admin-login input:focus{border-color:rgba(201,169,110,.5)}
+.admin-login input::placeholder{color:var(--muted)}
+.admin-login-btn{width:100%;background:var(--gold);color:#0D0C0B;font-size:.9rem;font-weight:700;padding:.9rem;border-radius:50px;border:none;cursor:pointer;transition:.2s}
+.admin-login-btn:hover{background:var(--gold2)}
+.admin-error{color:var(--danger);font-size:.8rem;margin-bottom:1rem;display:none}
+
+/* Admin Panel UI */
+.admin-panel{position:fixed;inset:0;z-index:999;background:var(--bg);overflow-y:auto;display:none}
+.admin-panel.open{display:block}
+.admin-nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.admin-nav-brand{display:flex;align-items:center;gap:.75rem}
+.admin-nav-brand span{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--white)}
+.admin-nav-brand small{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;background:var(--terra);color:#fff;padding:.2rem .5rem;border-radius:4px}
+.admin-tabs{display:flex;gap:.5rem}
+.admin-tab{background:none;border:1px solid var(--border);color:var(--muted2);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;padding:.5rem 1.1rem;border-radius:50px;cursor:pointer;transition:.2s}
+.admin-tab.active,.admin-tab:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.admin-close-btn{background:none;border:1px solid var(--border);color:var(--muted2);font-family:'DM Sans',sans-serif;font-size:.8rem;padding:.5rem 1rem;border-radius:50px;cursor:pointer;transition:.2s}
+.admin-close-btn:hover{border-color:var(--danger);color:var(--danger)}
+.admin-content{padding:2rem;max-width:1100px;margin:0 auto}
+.admin-section{display:none}
+.admin-section.active{display:block}
+.admin-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:gap}
+.admin-section-header h2{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--white)}
+.admin-add-btn{display:flex;align-items:center;gap:.5rem;background:var(--gold);color:#0D0C0B;font-size:.82rem;font-weight:700;padding:.6rem 1.25rem;border-radius:50px;border:none;cursor:pointer;transition:.2s}
+.admin-add-btn:hover{background:var(--gold2)}
+.admin-table{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden}
+.admin-table table{width:100%;border-collapse:collapse}
+.admin-table th{padding:.85rem 1.25rem;text-align:left;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:var(--bg3)}
+.admin-table td{padding:.85rem 1.25rem;font-size:.85rem;color:var(--text);border-bottom:1px solid var(--border);vertical-align:middle}
+.admin-table tr:last-child td{border-bottom:none}
+.admin-table tr:hover td{background:rgba(255,255,255,.02)}
+.admin-img-thumb{width:44px;height:44px;border-radius:8px;overflow:hidden;background:var(--surface)}
+.admin-img-thumb img{width:100%;height:100%;object-fit:cover}
+.status-badge{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border-radius:50px}
+.status-available{background:rgba(76,175,80,.15);color:#4CAF50;border:1px solid rgba(76,175,80,.3)}
+.status-unavailable{background:rgba(229,57,53,.15);color:#E53935;border:1px solid rgba(229,57,53,.3)}
+.admin-action-btns{display:flex;gap:.5rem}
+.edit-btn,.delete-btn,.toggle-btn{font-size:.72rem;font-weight:600;padding:.35rem .75rem;border-radius:50px;border:none;cursor:pointer;transition:.2s}
+.edit-btn{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(201,169,110,.25)}
+.edit-btn:hover{background:rgba(201,169,110,.2)}
+.delete-btn{background:rgba(229,57,53,.1);color:#E53935;border:1px solid rgba(229,57,53,.2)}
+.delete-btn:hover{background:rgba(229,57,53,.2)}
+.toggle-btn{background:rgba(255,255,255,.05);color:var(--muted2);border:1px solid var(--border)}
+.toggle-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Admin Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1100;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(6px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);width:100%;max-width:520px;max-height:90vh;overflow-y:auto}
+.modal-head{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg2);z-index:1}
+.modal-head h3{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--white)}
+.modal-close{background:none;border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-close:hover{border-color:var(--gold);color:var(--gold)}
+.modal-body{padding:1.5rem;display:flex;flex-direction:column;gap:1.1rem}
+.modal-foot{padding:1.25rem 1.5rem;border-top:1px solid var(--border);display:flex;gap:.75rem;justify-content:flex-end}
+.modal-cancel{background:none;border:1px solid var(--border);color:var(--muted2);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:.6rem 1.25rem;border-radius:50px;cursor:pointer;transition:.2s}
+.modal-cancel:hover{border-color:var(--danger);color:var(--danger)}
+.modal-save{background:var(--gold);color:#0D0C0B;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;padding:.6rem 1.5rem;border-radius:50px;border:none;cursor:pointer;transition:.2s}
+.modal-save:hover{background:var(--gold2)}
+.mfg{display:flex;flex-direction:column;gap:.4rem}
+.mfg label{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mfg input,.mfg select,.mfg textarea{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--text);outline:none;transition:.2s;width:100%;-webkit-appearance:none}
+.mfg input:focus,.mfg select:focus,.mfg textarea:focus{border-color:rgba(201,169,110,.5)}
+.mfg input::placeholder,.mfg textarea::placeholder{color:var(--muted)}
+.mfg textarea{resize:vertical;min-height:80px}
+.mfg select option{background:var(--bg3)}
+.mfg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.img-preview{width:100%;height:120px;border-radius:10px;overflow:hidden;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem;margin-top:.5rem}
+.img-preview img{width:100%;height:100%;object-fit:cover}
+.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.admin-stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem}
+.admin-stat-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--gold);display:block;line-height:1}
+.admin-stat-label{font-size:.72rem;color:var(--muted);letter-spacing:.08em;margin-top:.25rem;display:block}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:3rem 2rem 2rem}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;margin-bottom:0;border-bottom:1px solid var(--border)}
 .footer-brand{}
-.footer-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-bottom:1rem}
-.footer-logo-icon{
-  width:32px;height:32px;background:var(--gold);
-  border-radius:8px;display:flex;align-items:center;
-  justify-content:center;font-size:1rem;
-}
-.footer-logo-text{
-  font-family:'DM Serif Display',serif;
-  font-size:1.1rem;color:var(--white);
-}
-.footer-tagline{font-size:.83rem;color:var(--muted);line-height:1.7;max-width:240px;margin-bottom:1.25rem}
-.footer-phone{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:rgba(201,169,110,.12);border:1px solid rgba(201,169,110,.2);
-  color:var(--gold);font-size:.82rem;font-weight:600;
-  padding:.45rem 1rem;border-radius:50px;
-  text-decoration:none;transition:.2s;
-}
-.footer-phone:hover{background:rgba(201,169,110,.2)}
-.footer-col h4{
-  font-size:.7rem;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:1.25rem;
-}
-.footer-col a{
-  display:block;font-size:.85rem;
-  color:var(--muted2);text-decoration:none;
-  margin-bottom:.6rem;transition:color .2s;
-}
-.footer-col a:hover{color:var(--gold)}
-.footer-bottom{
-  max-width:1200px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:1rem;padding-top:1.75rem;
-}
-.footer-copy{font-size:.78rem;color:var(--muted)}
-.footer-made{font-size:.75rem;color:var(--muted);opacity:.6}
+.footer-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-bottom:1rem;cursor:pointer}
 
-/* ── SCROLL ANIMATIONS ── */
-[data-reveal]{
-  opacity:0;transform:translateY(24px);
-  transition:opacity .65s ease,transform .65s ease;
-}
+.footer-tagline{font-size:.82rem;color:var(--muted);line-height:1.7;max-width:220px;margin-bottom:1.25rem}
+.footer-phone{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold-dim);border:1px solid rgba(201,169,110,.2);color:var(--gold);font-size:.8rem;font-weight:600;padding:.4rem 1rem;border-radius:50px;text-decoration:none;transition:.2s}
+.footer-phone:hover{background:rgba(201,169,110,.2)}
+.footer-col h4{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.1rem}
+.footer-col a{display:block;font-size:.82rem;color:var(--muted2);text-decoration:none;margin-bottom:.55rem;transition:.2s;cursor:pointer}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.5rem}
+.footer-copy{font-size:.75rem;color:var(--muted)}
+
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--surface);border:1px solid var(--border2);color:var(--text);font-size:.85rem;font-weight:500;padding:.75rem 1.5rem;border-radius:50px;z-index:2000;transition:.3s;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.gold{border-color:rgba(201,169,110,.4);color:var(--gold)}
+
+/* ═══ WHATSAPP FLOAT ═══ */
+.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:400;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);cursor:pointer;transition:.2s;text-decoration:none}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(37,211,102,.5)}
+.wa-float svg{width:28px;height:28px;fill:#fff}
+
+/* ═══ SCROLL REVEAL ═══ */
+[data-reveal]{opacity:0;transform:translateY(20px);transition:.6s ease}
 [data-reveal].visible{opacity:1;transform:none}
 
-/* ── RESPONSIVE ── */
+/* ═══ RESPONSIVE ═══ */
 @media(max-width:1024px){
-  .hero-inner{grid-template-columns:1fr;gap:3rem;text-align:center}
-  .hero-desc{margin:0 auto 2.5rem}
-  .hero-btns{justify-content:center}
+  .hero-content{grid-template-columns:1fr}
   .hero-right{display:none}
   .footer-inner{grid-template-columns:1fr 1fr}
+  .about-hero-inner{grid-template-columns:1fr}
+  .about-img{display:none}
 }
 @media(max-width:768px){
-  .nav-links,.nav-call{display:none}
+  .nav-center,.nav-call{display:none}
   .burger{display:flex}
-  .sec,.sec-full{padding:4rem 1.25rem}
-  .cats-grid{grid-template-columns:1fr}
-  .cats-grid .cat{grid-column:span 1 !important}
-  .why-grid{grid-template-columns:1fr}
-  .why-visual{display:none}
+  .hero{padding:0 1.25rem 4rem}
+  .hero h1{font-size:2.4rem}
+  .hero-right{display:none}
+  .sec{padding:3.5rem 1.25rem}
+  .main-cats-grid{padding:1.25rem;grid-template-columns:1fr 1fr}
+  .products-grid{padding:1.25rem;grid-template-columns:1fr 1fr}
+  .subcats-grid{padding:1.25rem;grid-template-columns:1fr 1fr}
   .contact-grid{grid-template-columns:1fr}
-  .locs-grid{grid-template-columns:1fr}
+  .locations-grid{grid-template-columns:1fr}
+  .about-features{grid-template-columns:1fr 1fr}
   .frow{grid-template-columns:1fr}
   .footer-inner{grid-template-columns:1fr 1fr;gap:2rem}
-  .footer-bottom{flex-direction:column;align-items:flex-start}
-  .hero h1{font-size:2.4rem}
+  .admin-stats{grid-template-columns:1fr 1fr}
+  .admin-tabs{display:none}
+  .admin-table{overflow-x:auto}
+  .mfg-row{grid-template-columns:1fr}
 }
 @media(max-width:480px){
-  .hero{padding:5rem 1.25rem 3rem}
-  .cats-grid{border-radius:var(--r)}
+  .main-cats-grid,.products-grid,.subcats-grid{grid-template-columns:1fr}
   .footer-inner{grid-template-columns:1fr}
-  .hero-badge{font-size:.65rem}
-  .form-card{padding:1.5rem}
+  .hero-btns{flex-direction:column}
+  .hero-badge{font-size:.62rem}
+  .admin-stats{grid-template-columns:1fr 1fr}
+  .cart-drawer{width:100vw}
 }
+
+.nav-brand-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+.nav-brand-text small {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ═══ FILTER SIDEBAR ═══ */
+.catalog-layout{display:grid;grid-template-columns:260px 1fr;gap:2rem;padding:2rem;max-width:1200px;margin:0 auto;align-items:start}
+.filter-sidebar{position:sticky;top:80px;align-self:start;display:flex;flex-direction:column;gap:.75rem;min-width:0}
+.filter-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.filter-card-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;cursor:pointer;user-select:none}
+.filter-card-head h4{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted2)}
+.filter-card-head svg{color:var(--muted);transition:transform .25s;flex-shrink:0}
+.filter-card.collapsed .filter-card-head svg{transform:rotate(-90deg)}
+.filter-card-body{padding:0 1.25rem 1.25rem;display:flex;flex-direction:column;gap:.5rem}
+.filter-card.collapsed .filter-card-body{display:none}
+
+/* search */
+.filter-search{display:flex;align-items:center;gap:.5rem;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.6rem .85rem}
+.filter-search svg{color:var(--muted);flex-shrink:0}
+.filter-search input{background:none;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--text);width:100%}
+.filter-search input::placeholder{color:var(--muted)}
+
+/* price slider */
+.price-range-wrap{padding:.25rem 0}
+.price-inputs{display:flex;gap:.5rem;margin-bottom:.85rem}
+.price-input-g{display:flex;flex-direction:column;gap:.3rem;flex:1}
+.price-input-g label{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.price-input-g input{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--text);width:100%;outline:none}
+.price-input-g input:focus{border-color:rgba(201,169,110,.4)}
+.range-slider{position:relative;height:4px;background:var(--border2);border-radius:2px;margin:.5rem 0 1rem}
+.range-slider-fill{position:absolute;height:100%;background:var(--gold);border-radius:2px}
+.range-slider input[type=range]{position:absolute;width:100%;height:100%;opacity:0;cursor:pointer;top:0;left:0;margin:0}
+.filter-apply-btn{width:100%;background:var(--gold);color:#0D0C0B;font-size:.78rem;font-weight:700;padding:.6rem;border-radius:8px;border:none;cursor:pointer;transition:.2s;letter-spacing:.04em}
+.filter-apply-btn:hover{background:var(--gold2)}
+
+/* checkboxes */
+.filter-check-item{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:.2rem 0}
+.filter-check-left{display:flex;align-items:center;gap:.6rem}
+.filter-check-box{width:16px;height:16px;border:1.5px solid var(--border2);border-radius:4px;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0}
+.filter-check-item.checked .filter-check-box{background:var(--gold);border-color:var(--gold)}
+.filter-check-item.checked .filter-check-box::after{content:'✓';font-size:.65rem;color:#0D0C0B;font-weight:700}
+.filter-check-label{font-size:.82rem;color:var(--muted2);transition:.2s}
+.filter-check-item.checked .filter-check-label{color:var(--white)}
+.filter-check-count{font-size:.7rem;color:var(--muted);background:var(--surface);padding:.1rem .4rem;border-radius:4px}
+
+/* sort + results bar */
+.products-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;gap:.75rem;width:100%;min-width:0}
+.products-count{font-size:.82rem;color:var(--muted)}
+.products-count strong{color:var(--white)}
+.sort-select{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.5rem 2.2rem .5rem .85rem;font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--text);outline:none;cursor:pointer;transition:.2s;-webkit-appearance:none;flex-shrink:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A8278' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .6rem center}
+.sort-select:focus{border-color:rgba(201,169,110,.4)}
+.sort-select option{background:var(--bg2)}
+
+/* active filters chips */
+.active-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.filter-chip{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold-dim);border:1px solid rgba(201,169,110,.25);color:var(--gold);font-size:.72rem;font-weight:600;padding:.3rem .7rem;border-radius:50px;cursor:pointer}
+.filter-chip:hover{background:rgba(201,169,110,.2)}
+.filter-chip svg{width:10px;height:10px}
+.clear-all-btn{font-size:.72rem;color:var(--muted);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0}
+.clear-all-btn:hover{color:var(--terra)}
+
+/* mobile filter toggle */
+.filter-toggle-btn{display:none;align-items:center;gap:.5rem;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;padding:.6rem 1.1rem;border-radius:8px;cursor:pointer;transition:.2s}
+.filter-toggle-btn:hover{border-color:var(--gold);color:var(--gold)}
+.filter-sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:600;backdrop-filter:blur(4px)}
+.filter-sidebar-overlay.open{display:block}
+
+/* no results */
+.no-results{text-align:center;padding:4rem 2rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:1rem}
+.no-results svg{opacity:.25}
+.no-results p{font-size:.9rem}
+.no-results button{background:none;border:1px solid var(--border);color:var(--muted2);font-family:'DM Sans',sans-serif;font-size:.82rem;padding:.6rem 1.25rem;border-radius:50px;cursor:pointer;transition:.2s}
+.no-results button:hover{border-color:var(--gold);color:var(--gold)}
+
+@media(max-width:900px){
+  .catalog-layout{grid-template-columns:1fr}
+  .filter-sidebar{position:fixed;top:0;left:0;bottom:0;width:300px;max-width:85vw;background:var(--bg2);border-right:1px solid var(--border);z-index:601;overflow-y:auto;padding:1.5rem;transform:translateX(-100%);transition:.3s cubic-bezier(.4,0,.2,1);border-radius:0}
+  .filter-sidebar.mobile-open{transform:translateX(0)}
+  .filter-toggle-btn{display:flex}
+}
+
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <a href="#" class="nav-brand">
-  
-    <div class="nav-brand-text">
-      Stone & More
-      <small>Lebanon</small>
+  <div class="nav-left">
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="nav-brand-text">Stone &amp; More<small>Lebanon</small></div>
     </div>
-  </a>
-  <div class="nav-links">
-    <a href="#products">Products</a>
-    <a href="#locations">Locations</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
   </div>
-  <a href="tel:03412003" class="nav-call">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 .72h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.36a16 16 0 006.29 6.29l1.43-1.43a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 15.72v1.2z"/></svg>
-    03 412 003
-  </a>
-  <button class="burger" id="burger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-center">
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('catalog')">Products</a>
+    <a onclick="showPage('about')">About</a>
+    <a onclick="showPage('contact')">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-cart" onclick="toggleCart()">
+      🛒 Cart
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <a href="tel:03412003" class="nav-call">📞 03 412 003</a>
+    <button class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#products" class="m-link">Products</a>
-  <a href="#locations" class="m-link">Locations</a>
-  <a href="#about" class="m-link">About</a>
-  <a href="#contact" class="m-link">Contact</a>
+  <a onclick="showPage('home');closeMobile()">Home</a>
+  <a onclick="showPage('catalog');closeMobile()">Products</a>
+  <a onclick="showPage('about');closeMobile()">About</a>
+  <a onclick="showPage('contact');closeMobile()">Contact</a>
   <a href="tel:03412003" class="m-call">📞 03 412 003</a>
 </div>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-badge">🇱🇧 Premium Materials — Lebanon</div>
-      <h1>Where Stone<br>Meets <em>Modern</em><br>Living</h1>
-      <p class="hero-desc">Stone, terrazzo, fireplaces, BBQ ovens, fire pits, roof tiles & artificial grass. Two showrooms across North Lebanon.</p>
-      <div class="hero-btns">
-        <a href="#products" class="btn-gold">
-          Explore Products
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#contact" class="btn-ghost">Get a Quote</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-card">
-        <div class="hero-card-icon">🏠</div>
-        <div class="hero-card-title">Complete Home Materials</div>
-        <div class="hero-card-desc">Everything from foundation to finish — stone, roofing, outdoor living, and more.</div>
-        <div class="hero-stats-row">
-          <div class="hero-stat"><span class="n">8+</span><span class="l">Categories</span></div>
-          <div class="hero-stat"><span class="n">20+</span><span class="l">Years Active</span></div>
-          <div class="hero-stat"><span class="n">500+</span><span class="l">Projects</span></div>
+<!-- ══════════ HOME PAGE ══════════ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge">🇱🇧 Premium Materials — Lebanon</div>
+        <h1>Where Stone<br>Meets <em>Modern</em><br>Living</h1>
+        <p class="hero-desc">Stone, terrazzo, fireplaces, BBQ ovens, fire pits, roof tiles & artificial grass. Two showrooms across North Lebanon.</p>
+        <div class="hero-btns">
+          <button class="btn-gold" onclick="showPage('catalog')">Explore Products →</button>
+          <button class="btn-ghost" onclick="showPage('contact')">Get a Quote</button>
         </div>
       </div>
-      <div class="hero-card">
-        <div class="hero-card-icon">📍</div>
-        <div class="hero-card-title">Zgharta – Miziara</div>
-        <div class="hero-card-desc">Miziara Road, North Lebanon</div>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-icon">📍</div>
-        <div class="hero-card-title">Batroun – Madfoun</div>
-        <div class="hero-card-desc">Batroun Highway, North Lebanon</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-track" id="ticker">
-    <span class="ticker-item">Natural Stone</span>
-    <span class="ticker-item">Terrazzo</span>
-    <span class="ticker-item">Fireplaces</span>
-    <span class="ticker-item">Wood Stoves</span>
-    <span class="ticker-item">BBQ Ovens</span>
-    <span class="ticker-item">Fire Pits</span>
-    <span class="ticker-item">Roof Tiles</span>
-    <span class="ticker-item">Artificial Grass</span>
-    <span class="ticker-item">Zgharta Showroom</span>
-    <span class="ticker-item">Batroun Showroom</span>
-    <span class="ticker-item">Natural Stone</span>
-    <span class="ticker-item">Terrazzo</span>
-    <span class="ticker-item">Fireplaces</span>
-    <span class="ticker-item">Wood Stoves</span>
-    <span class="ticker-item">BBQ Ovens</span>
-    <span class="ticker-item">Fire Pits</span>
-    <span class="ticker-item">Roof Tiles</span>
-    <span class="ticker-item">Artificial Grass</span>
-    <span class="ticker-item">Zgharta Showroom</span>
-    <span class="ticker-item">Batroun Showroom</span>
-  </div>
-</div>
-
-<!-- PRODUCTS -->
-<div class="cats-section" id="products">
-  <div class="sec">
-    <div data-reveal>
-      <div class="sec-tag">What We Offer</div>
-      <h2 class="sec-h">Our <em>Product Range</em></h2>
-      <p class="sec-p">Premium building and finishing materials for every stage of your project — from structure to style.</p>
-    </div>
-    <div class="cats-grid" data-reveal>
-      <div class="cat">
-        <div class="cat-num">01</div>
-        <div class="cat-icon">🪨</div>
-        <div class="cat-name">Natural Stone</div>
-        <p class="cat-desc">Authentic Lebanese and imported stone for cladding, flooring, walls, and facades.</p>
-        <div class="cat-arrow">→</div>
-      </div>
-      <div class="cat">
-        <div class="cat-num">02</div>
-        <div class="cat-icon">🟫</div>
-        <div class="cat-name">Terrazzo</div>
-        <p class="cat-desc">Classic and modern terrazzo finishes for elegant interior surfaces.</p>
-        <div class="cat-arrow">→</div>
-      </div>
-      <div class="cat">
-        <div class="cat-num">03</div>
-        <div class="cat-icon">🔥</div>
-        <div class="cat-name">Fireplaces & Stoves</div>
-        <p class="cat-desc">Elegant wood-burning fireplaces and stoves for warmth and atmosphere.</p>
-        <div class="cat-arrow">→</div>
-      </div>
-      <div class="cat">
-        <div class="cat-num">04</div>
-        <div class="cat-icon">🍖</div>
-        <div class="cat-name">BBQ & Outdoor Ovens</div>
-        <p class="cat-desc">Stone-built BBQs and traditional ovens for the perfect outdoor kitchen.</p>
-        <div class="cat-arrow">→</div>
-      </div>
-      <div class="cat">
-        <div class="cat-num">05</div>
-        <div class="cat-icon">🌀</div>
-        <div class="cat-name">Fire Pits</div>
-        <p class="cat-desc">Stylish outdoor fire pits for gathering spaces and garden ambiance.</p>
-        <div class="cat-arrow">→</div>
-      </div>
-      <div class="cat">
-        <div class="cat-num">06</div>
-        <div class="cat-icon">🏠</div>
-        <div class="cat-name">Roof Tiles</div>
-        <p class="cat-desc">Durable traditional and modern roof tiles suited to Lebanese architecture.</p>
-        <div class="cat-arrow">→</div>
-      </div>
-      <div class="cat" style="grid-column:span 2">
-        <div class="cat-num">07</div>
-        <div class="cat-icon">🌿</div>
-        <div class="cat-name">Artificial Grass</div>
-        <p class="cat-desc" style="max-width:500px">Premium artificial turf for gardens, rooftops, and outdoor areas — low maintenance, year-round green.</p>
-        <div class="cat-arrow">→</div>
-      </div>
-      <div class="cat">
-        <div class="cat-num">08</div>
-        <div class="cat-icon">✨</div>
-        <div class="cat-name">Custom Orders</div>
-        <p class="cat-desc">Can't find what you need? We source custom materials for any project.</p>
-        <div class="cat-arrow">→</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- GALLERY -->
-<div class="gallery-outer">
-  <div class="gallery-label">Project Inspiration</div>
-  <div class="gal-track" id="galTrack">
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=75" alt=""></div>
-    <!-- duplicate -->
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&q=75" alt=""></div>
-    <div class="gal-img"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=75" alt=""></div>
-  </div>
-</div>
-
-<!-- LOCATIONS -->
-<div id="locations" style="background:var(--bg)">
-  <div class="sec">
-    <div data-reveal>
-      <div class="sec-tag">Find Us</div>
-      <h2 class="sec-h">Two <em>Showrooms</em><br>Across Lebanon</h2>
-      <p class="sec-p">Visit us in person to explore our full range. Our team will guide you through every option.</p>
-    </div>
-    <div class="locs-grid" data-reveal>
-      <div class="loc-card">
-        <div class="loc-map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26000!2d35.9!3d34.37!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1521f7478ca4d3df%3A0x23a3bbea823f9359!2sStone%20and%20More!5e0!3m2!1sen!2slb!4v1680000000001" allowfullscreen="" loading="lazy"></iframe>
+      <div class="hero-right">
+        <div class="hero-stat-card">
+          <span class="hero-card-icon">🏠</span>
+          <div class="hero-card-title">Complete Home Materials</div>
+          <div class="hero-card-desc">Everything from foundation to finish — stone, roofing, outdoor living, and more.</div>
+          <div class="hero-stats-row">
+            <div class="hs"><span class="n">8+</span><span class="l">Categories</span></div>
+            <div class="hs"><span class="n">20+</span><span class="l">Years Active</span></div>
+            <div class="hs"><span class="n">500+</span><span class="l">Projects</span></div>
+          </div>
         </div>
-        <div class="loc-body">
-          <span class="loc-tag">Showroom 01</span>
-          <div class="loc-name">Zgharta – Miziara</div>
-          <div class="loc-addr">Miziara Road, North Lebanon<br>Open 7 days a week</div>
-          <a href="https://maps.app.goo.gl/stone-and-more" class="loc-link" target="_blank">Get Directions →</a>
-        </div>
-      </div>
-      <div class="loc-card">
-        <div class="loc-map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26000!2d35.65!3d34.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1521f7478ca4d3df%3A0x23a3bbea823f9359!2sStone%20and%20More!5e0!3m2!1sen!2slb!4v1680000000002" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-        <div class="loc-body">
-          <span class="loc-tag">Showroom 02</span>
-          <div class="loc-name">Batroun – Madfoun</div>
-          <div class="loc-addr">Batroun Highway, North Lebanon<br>Open 7 days a week</div>
-          <a href="https://maps.app.goo.gl/stone-and-more" class="loc-link" target="_blank">Get Directions →</a>
+        <div class="hero-locs">
+          <div class="hero-loc-card">
+            <span class="hero-loc-pin">📍</span>
+            <div class="hero-loc-name">Zgharta – Miziara</div>
+            <div class="hero-loc-addr">Miziara Road, North Lebanon</div>
+          </div>
+          <div class="hero-loc-card">
+            <span class="hero-loc-pin">📍</span>
+            <div class="hero-loc-name">Batroun – Madfoun</div>
+            <div class="hero-loc-addr">Batroun Highway, North Lebanon</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- WHY -->
-<div class="why-bg" id="about">
-  <div class="sec">
-    <div class="why-grid">
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Natural Stone</span><span class="ticker-item">Terrazzo</span><span class="ticker-item">Wood Fireplaces</span><span class="ticker-item">Gas Fireplaces</span><span class="ticker-item">Electric Fireplaces</span><span class="ticker-item">BBQ & Pizza Ovens</span><span class="ticker-item">Outdoor Fire Pits</span><span class="ticker-item">Roof Tiles</span><span class="ticker-item">Artificial Grass</span><span class="ticker-item">Stoves</span><span class="ticker-item">Accessories</span>
+      <span class="ticker-item">Natural Stone</span><span class="ticker-item">Terrazzo</span><span class="ticker-item">Wood Fireplaces</span><span class="ticker-item">Gas Fireplaces</span><span class="ticker-item">Electric Fireplaces</span><span class="ticker-item">BBQ & Pizza Ovens</span><span class="ticker-item">Outdoor Fire Pits</span><span class="ticker-item">Roof Tiles</span><span class="ticker-item">Artificial Grass</span><span class="ticker-item">Stoves</span><span class="ticker-item">Accessories</span>
+    </div>
+  </div>
+
+  <!-- Featured Categories -->
+  <div style="background:var(--bg2)">
+    <div class="sec">
       <div data-reveal>
-        <div class="sec-tag">Why Stone & More</div>
-        <h2 class="sec-h">Built on<br><em>Trust & Quality</em></h2>
-        <p class="sec-p" style="margin-bottom:0">Two decades of serving Lebanese homes and contractors with premium materials and honest expertise.</p>
-        <div class="feat-list">
-          <div class="feat">
-            <div class="feat-icon">🏔️</div>
-            <div class="feat-body">
-              <div class="feat-title">Premium Sourcing</div>
-              <p class="feat-desc">Carefully selected stone and materials from top suppliers in Lebanon and abroad.</p>
-            </div>
-          </div>
-          <div class="feat">
-            <div class="feat-icon">🤝</div>
-            <div class="feat-body">
-              <div class="feat-title">Expert Guidance</div>
-              <p class="feat-desc">Our team works with architects, contractors, and homeowners to find the perfect match.</p>
-            </div>
-          </div>
-          <div class="feat">
-            <div class="feat-icon">📦</div>
-            <div class="feat-body">
-              <div class="feat-title">One-Stop Shop</div>
-              <p class="feat-desc">Stone, outdoor living, roofing, and landscaping — all under one roof, two locations.</p>
-            </div>
-          </div>
+        <div class="sec-tag">Browse by Category</div>
+        <h2 class="sec-h">Everything for Your <em>Home</em></h2>
+        <p class="sec-p">From raw stone to finished fireplaces — we carry everything you need for a complete build.</p>
+      </div>
+      <div class="main-cats-grid" id="homeCatsGrid" style="padding:0;margin-top:2.5rem"></div>
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <div class="gal-outer">
+    <div class="gal-label">Project Inspiration</div>
+    <div class="gal-track">
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&q=70" alt=""></div>
+      <div class="gal-img"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&q=70" alt=""></div>
+    </div>
+  </div>
+
+  <!-- Why Us -->
+  <div style="background:var(--bg3)">
+    <div class="sec">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center" data-reveal>
+        <div>
+          <div class="sec-tag">Why Stone & More</div>
+          <h2 class="sec-h">Built on <em>Trust</em><br>& Quality</h2>
+          <p class="sec-p" style="margin-bottom:2rem">Two decades of serving Lebanese homes with premium materials, honest advice, and expert guidance.</p>
+          <button class="btn-gold" onclick="showPage('about')">Learn More →</button>
+        </div>
+        <div class="about-features">
+          <div class="about-feat"><span class="about-feat-icon">🏔️</span><div class="about-feat-title">Premium Materials</div><p class="about-feat-desc">Carefully sourced natural and imported stone.</p></div>
+          <div class="about-feat"><span class="about-feat-icon">🤝</span><div class="about-feat-title">Expert Guidance</div><p class="about-feat-desc">Our team helps you find the perfect match.</p></div>
+          <div class="about-feat"><span class="about-feat-icon">📦</span><div class="about-feat-title">One-Stop Shop</div><p class="about-feat-desc">All materials, two showroom locations.</p></div>
+          <div class="about-feat"><span class="about-feat-icon">⭐</span><div class="about-feat-title">20+ Years Active</div><p class="about-feat-desc">Trusted by hundreds of Lebanese projects.</p></div>
         </div>
       </div>
-      <div class="why-visual" data-reveal>
-        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=700&q=80" alt="Showroom interior">
-        <div class="why-visual-chip">
-          <div class="why-chip-icon">📞</div>
-          <div class="why-chip-text">
-            <strong>Ready to help</strong>
-            <span>Call us: <a href="tel:03412003" style="color:var(--gold);text-decoration:none">03 412 003</a></span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo-text">Stone &amp; More</div>
+        <p class="footer-tagline">Premium building materials for Lebanese homes. Two showrooms, two decades of trust.</p>
+        <a href="tel:03412003" class="footer-phone">📞 03 412 003</a>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a onclick="showPage('catalog')">Natural Stone</a>
+        <a onclick="showPage('catalog')">Terrazzo</a>
+        <a onclick="showPage('catalog')">Fireplaces</a>
+        <a onclick="showPage('catalog')">BBQ &amp; Ovens</a>
+        <a onclick="showPage('catalog')">Roof Tiles</a>
+        <a onclick="showPage('catalog')">Artificial Grass</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a onclick="showPage('about')">About Us</a>
+        <a onclick="showPage('about')">Our Locations</a>
+        <a onclick="showPage('contact')">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Showrooms</h4>
+        <a>Zgharta – Miziara Road</a>
+        <a>Batroun – Madfoun</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Stone &amp; More Lebanon. All rights reserved.</span>
+      <span class="footer-made">Designed by Estelle</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════ CATALOG PAGE ══════════ -->
+<div class="page" id="page-catalog">
+  <div class="cats-header">
+    <div class="cats-header-inner">
+      <div class="breadcrumb" id="breadcrumb">
+        <a onclick="showPage('home')">Home</a>
+        <span>›</span>
+        <span>Products</span>
+      </div>
+      <h2 id="catalogTitle">All Categories</h2>
+      <p id="catalogSubtitle">Browse our full range of premium building materials</p>
+    </div>
+  </div>
+  <div id="catalogView"></div>
+</div>
+
+<!-- ══════════ ABOUT PAGE ══════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <div>
+        <div class="sec-tag">About Us</div>
+        <h2 class="sec-h" style="font-size:2.5rem">Lebanon's Trusted <em>Stone Specialists</em></h2>
+        <p style="font-size:.95rem;line-height:1.8;color:var(--muted2);margin-top:1rem;max-width:480px">Stone & More has been Lebanon's trusted supplier of premium building and finishing materials for over two decades. From the mountains of Zgharta-Miziara to the coast of Batroun-Madfoun, we bring the finest products to homes and projects across the country.</p>
+        <p style="font-size:.95rem;line-height:1.8;color:var(--muted2);margin-top:1rem;max-width:480px">Our team works directly with clients, architects, and contractors to help select the perfect materials — combining authentic craftsmanship with modern design sensibility.</p>
+        <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap">
+          <button class="btn-gold" onclick="showPage('catalog')">Browse Products →</button>
+          <button class="btn-ghost" onclick="showPage('contact')">Contact Us</button>
+        </div>
+      </div>
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?w=700&q=80" alt="Showroom">
+      </div>
+    </div>
+  </div>
+  <div style="background:var(--bg)">
+    <div class="sec">
+      <div class="about-features" style="margin-bottom:3rem" data-reveal>
+        <div class="about-feat"><span class="about-feat-icon">🪨</span><div class="about-feat-title">8+ Categories</div><p class="about-feat-desc">Stone, terrazzo, fireplaces, BBQ, roof tiles, grass & more.</p></div>
+        <div class="about-feat"><span class="about-feat-icon">📍</span><div class="about-feat-title">2 Showrooms</div><p class="about-feat-desc">Zgharta-Miziara and Batroun-Madfoun.</p></div>
+        <div class="about-feat"><span class="about-feat-icon">⭐</span><div class="about-feat-title">500+ Projects</div><p class="about-feat-desc">Homes and commercial projects across Lebanon.</p></div>
+        <div class="about-feat"><span class="about-feat-icon">🏆</span><div class="about-feat-title">20+ Years</div><p class="about-feat-desc">Two decades of trust and quality service.</p></div>
+      </div>
+      <div class="sec-tag" data-reveal>Our Locations</div>
+      <h2 class="sec-h" data-reveal>Visit Our <em>Showrooms</em></h2>
+      <div class="locations-grid" style="margin-top:2rem" data-reveal>
+        <div class="loc-card">
+          <div class="loc-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26000!2d35.9!3d34.37!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1521f7478ca4d3df%3A0x23a3bbea823f9359!2sStone%20and%20More!5e0!3m2!1sen!2slb!4v1" allowfullscreen="" loading="lazy"></iframe></div>
+          <div class="loc-body">
+            <span class="loc-tag">Showroom 01</span>
+            <div class="loc-name">Zgharta – Miziara</div>
+            <div class="loc-addr">Miziara Road, North Lebanon<br>Open 7 days a week</div>
+            <a href="https://maps.google.com" target="_blank" class="loc-link">Get Directions →</a>
+          </div>
+        </div>
+        <div class="loc-card">
+          <div class="loc-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26000!2d35.65!3d34.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1521f7478ca4d3df%3A0x23a3bbea823f9359!2sStone%20and%20More!5e0!3m2!1sen!2slb!4v1" allowfullscreen="" loading="lazy"></iframe></div>
+          <div class="loc-body">
+            <span class="loc-tag">Showroom 02</span>
+            <div class="loc-name">Batroun – Madfoun</div>
+            <div class="loc-addr">Batroun Highway, North Lebanon<br>Open 7 days a week</div>
+            <a href="https://maps.google.com" target="_blank" class="loc-link">Get Directions →</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo-text">Stone &amp; More</div>
+        <p class="footer-tagline">Premium building materials for Lebanese homes. Two showrooms, two decades of trust.</p>
+        <a href="tel:03412003" class="footer-phone">📞 03 412 003</a>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a onclick="showPage('catalog')">Natural Stone</a>
+        <a onclick="showPage('catalog')">Terrazzo</a>
+        <a onclick="showPage('catalog')">Fireplaces</a>
+        <a onclick="showPage('catalog')">BBQ &amp; Ovens</a>
+        <a onclick="showPage('catalog')">Roof Tiles</a>
+        <a onclick="showPage('catalog')">Artificial Grass</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a onclick="showPage('about')">About Us</a>
+        <a onclick="showPage('about')">Our Locations</a>
+        <a onclick="showPage('contact')">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Showrooms</h4>
+        <a>Zgharta – Miziara Road</a>
+        <a>Batroun – Madfoun</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Stone &amp; More Lebanon. All rights reserved.</span>
+      <span class="footer-made">Designed by Estelle</span>
+    </div>
+  </footer>
 </div>
 
-<!-- CONTACT -->
-<div class="contact-bg" id="contact">
+<!-- ══════════ CONTACT PAGE ══════════ -->
+<div class="page" id="page-contact">
   <div class="sec">
     <div data-reveal>
       <div class="sec-tag">Contact</div>
       <h2 class="sec-h">Start Your <em>Project</em></h2>
     </div>
-    <div class="contact-grid" data-reveal>
+    <div class="contact-grid" style="margin-top:2.5rem" data-reveal>
       <div>
-        <p class="sec-p">Reach out for a quote, visit a showroom, or just ask a question. We're here to help.</p>
-        <div class="contact-info">
-          <div class="c-item">
-            <div class="c-icon">📞</div>
-            <div class="c-body">
-              <label>Phone</label>
-              <a href="tel:03412003">03 412 003</a>
-            </div>
-          </div>
-          <div class="c-item">
-            <div class="c-icon">📍</div>
-            <div class="c-body">
-              <label>Showroom 1</label>
-              <span>Zgharta – Miziara Road, North Lebanon</span>
-            </div>
-          </div>
-          <div class="c-item">
-            <div class="c-icon">📍</div>
-            <div class="c-body">
-              <label>Showroom 2</label>
-              <span>Batroun Highway – Madfoun, North Lebanon</span>
-            </div>
-          </div>
-          <div class="c-item">
-            <div class="c-icon">🕐</div>
-            <div class="c-body">
-              <label>Hours</label>
-              <span>Open 6 days a week</span>
-            </div>
-          </div>
+        <p style="font-size:.9rem;line-height:1.8;color:var(--muted2);margin-bottom:1.5rem">Reach out for a quote, visit a showroom, or just ask a question. We're here to help.</p>
+        <div class="c-items">
+          <div class="c-item"><div class="c-icon">📞</div><div class="c-body"><label>Phone</label><a href="tel:03412003">03 412 003</a></div></div>
+          <div class="c-item"><div class="c-icon">📍</div><div class="c-body"><label>Showroom 1</label><span>Zgharta – Miziara Road, North Lebanon</span></div></div>
+          <div class="c-item"><div class="c-icon">📍</div><div class="c-body"><label>Showroom 2</label><span>Batroun Highway – Madfoun, North Lebanon</span></div></div>
+          <div class="c-item"><div class="c-icon">🕐</div><div class="c-body"><label>Hours</label><span>Open 7 days a week</span></div></div>
         </div>
       </div>
       <div class="form-card">
-        <div class="form-title">Send us a message</div>
-        <form class="form-body" onsubmit="handleForm(event)">
+        <h3>Send us a message</h3>
+        <form class="form-body" onsubmit="submitForm(event)">
           <div class="frow">
-            <div class="fg">
-              <label>Your Name</label>
-              <input type="text" placeholder="Full name" required>
-            </div>
-            <div class="fg">
-              <label>Phone Number</label>
-              <input type="tel" placeholder="+961 xx xxx xxx">
-            </div>
+            <div class="fg"><label>Full Name</label><input type="text" placeholder="Your name" required></div>
+            <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+961 xx xxx xxx"></div>
           </div>
-          <div class="fg">
-            <label>Product Interest</label>
+          <div class="fg"><label>Product Interest</label>
             <select>
               <option value="">Select a category...</option>
-              <option>Natural Stone</option>
-              <option>Terrazzo</option>
-              <option>Fireplaces & Stoves</option>
-              <option>BBQ & Outdoor Ovens</option>
-              <option>Fire Pits</option>
-              <option>Roof Tiles</option>
-              <option>Artificial Grass</option>
-              <option>Multiple / Other</option>
+              <option>Stone & Cladding</option><option>Fireplaces</option><option>Stoves</option>
+              <option>BBQ & Ovens</option><option>Fire Pits</option><option>Roof Tiles</option>
+              <option>Artificial Grass</option><option>Accessories</option><option>Multiple / Other</option>
             </select>
           </div>
-          <div class="fg">
-            <label>Message</label>
-            <textarea placeholder="Tell us about your project..."></textarea>
-          </div>
-          <button type="submit" class="submit-btn">
-            Send Inquiry
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
+          <div class="fg"><label>Message</label><textarea placeholder="Tell us about your project..."></textarea></div>
+          <button type="submit" class="submit-btn">Send Message →</button>
           <div class="form-success" id="formSuccess">✓ Message sent! We'll be in touch soon.</div>
         </form>
       </div>
@@ -946,87 +812,1010 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="#" class="footer-logo">
-      
-        <div class="footer-logo-text">Stone & More</div>
-      </a>
-      <p class="footer-tagline">Premium building materials for Lebanese homes. Two showrooms, two decades of trust.</p>
-      <a href="tel:03412003" class="footer-phone">📞 03 412 003</a>
+<!-- ══════════ CART DRAWER ══════════ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>🛒 Your Cart</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cartTotal">$0</span>
     </div>
-    <div class="footer-col">
-      <h4>Products</h4>
-      <a href="#products">Natural Stone</a>
-      <a href="#products">Terrazzo</a>
-      <a href="#products">Fireplaces</a>
-      <a href="#products">BBQ & Ovens</a>
-      <a href="#products">Roof Tiles</a>
-      <a href="#products">Artificial Grass</a>
+    <div class="cart-note">💡 Prices are indicative. Final pricing confirmed at showroom.</div>
+    <button class="whatsapp-btn" onclick="checkoutWhatsApp()">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.552 4.103 1.513 5.836L.057 23.273a.5.5 0 00.609.64l5.638-1.479A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.028-1.384l-.36-.214-3.733.979.997-3.638-.235-.374A9.818 9.818 0 1112 21.818z"/></svg>
+      Order via WhatsApp
+    </button>
+    <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+  </div>
+</div>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/96103412003" target="_blank" class="wa-float" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.552 4.103 1.513 5.836L.057 23.273a.5.5 0 00.609.64l5.638-1.479A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.028-1.384l-.36-.214-3.733.979.997-3.638-.235-.374A9.818 9.818 0 1112 21.818z"/></svg>
+</a>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ══════════ ADMIN LOGIN ══════════ -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-login">
+    <div style="font-size:2rem;margin-bottom:.5rem">🔐</div>
+    <h2>Admin Panel</h2>
+    <p>Enter password to manage products</p>
+    <div class="admin-error" id="adminError">Wrong password. Try again.</div>
+    <input type="password" id="adminPass" placeholder="Password" onkeydown="if(event.key==='Enter')adminLogin()">
+    <button class="admin-login-btn" onclick="adminLogin()">Enter →</button>
+  </div>
+</div>
+
+<!-- ══════════ ADMIN PANEL ══════════ -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-nav">
+    <div class="admin-nav-brand">
+      <span>Stone & More</span>
+      <small>Admin</small>
     </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="#about">About Us</a>
-      <a href="#locations">Our Locations</a>
-      <a href="#contact">Contact</a>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="showAdminTab('dashboard')">📊 Dashboard</button>
+      <button class="admin-tab" onclick="showAdminTab('categories')">📂 Categories</button>
+      <button class="admin-tab" onclick="showAdminTab('products')">📦 Products</button>
     </div>
-    <div class="footer-col">
-      <h4>Showrooms</h4>
-      <a href="#">Zgharta – Miziara Road</a>
-      <a href="#">Batroun – Madfoun</a>
+    <button class="admin-close-btn" onclick="closeAdmin()">✕ Exit Admin</button>
+  </div>
+
+  <div class="admin-content">
+    <!-- Dashboard -->
+    <div class="admin-section active" id="admin-dashboard">
+      <div class="admin-stats" id="adminStats"></div>
+      <h3 style="font-family:'DM Serif Display',serif;color:var(--white);margin-bottom:1rem">Recent Products</h3>
+      <div class="admin-table"><table><thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Status</th></tr></thead><tbody id="dashboardTable"></tbody></table></div>
+    </div>
+
+    <!-- Categories -->
+    <div class="admin-section" id="admin-categories">
+      <div class="admin-section-header">
+        <h2>Categories</h2>
+        <button class="admin-add-btn" onclick="openCatModal()">+ Add Category</button>
+      </div>
+      <div class="admin-table"><table><thead><tr><th>Icon</th><th>Name</th><th>Subcategories</th><th>Products</th><th>Actions</th></tr></thead><tbody id="catsTable"></tbody></table></div>
+      <h3 style="font-family:'DM Serif Display',serif;color:var(--white);margin:2rem 0 1rem">Subcategories</h3>
+      <div style="margin-bottom:1rem;display:flex;justify-content:flex-end"><button class="admin-add-btn" onclick="openSubcatModal()">+ Add Subcategory</button></div>
+      <div class="admin-table"><table><thead><tr><th>Name</th><th>Parent Category</th><th>Products</th><th>Actions</th></tr></thead><tbody id="subcatsTable"></tbody></table></div>
+    </div>
+
+    <!-- Products -->
+    <div class="admin-section" id="admin-products">
+      <div class="admin-section-header">
+        <h2>Products</h2>
+        <button class="admin-add-btn" onclick="openProductModal()">+ Add Product</button>
+      </div>
+      <div style="margin-bottom:1rem;display:flex;gap:.75rem;flex-wrap:wrap">
+        <select id="filterCat" onchange="renderProductsTable()" style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.5rem .85rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none">
+          <option value="">All Categories</option>
+        </select>
+      </div>
+      <div class="admin-table"><table><thead><tr><th>Image</th><th>Name</th><th>Subcategory</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead><tbody id="productsTable"></tbody></table></div>
     </div>
   </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Stone & More Lebanon. All rights reserved.</span>
-    <span class="footer-made">Designed by Estelle </span>
+</div>
+
+<!-- Category Modal -->
+<div class="modal-overlay" id="catModal">
+  <div class="modal">
+    <div class="modal-head"><h3 id="catModalTitle">Add Category</h3><button class="modal-close" onclick="closeModal('catModal')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="catModalId">
+      <div class="mfg"><label>Category Name</label><input type="text" id="catName" placeholder="e.g. Fireplaces"></div>
+      <div class="mfg"><label>Icon (emoji)</label><input type="text" id="catIcon" placeholder="e.g. 🔥"></div>
+      <div class="mfg"><label>Image URL</label><input type="text" id="catImg" placeholder="https://..." oninput="updateImgPreview('catImgPreview',this.value)"></div>
+      <div class="img-preview" id="catImgPreview"><span>Image preview</span></div>
+    </div>
+    <div class="modal-foot"><button class="modal-cancel" onclick="closeModal('catModal')">Cancel</button><button class="modal-save" onclick="saveCategory()">Save Category</button></div>
   </div>
-</footer>
+</div>
+
+<!-- Subcategory Modal -->
+<div class="modal-overlay" id="subcatModal">
+  <div class="modal">
+    <div class="modal-head"><h3 id="subcatModalTitle">Add Subcategory</h3><button class="modal-close" onclick="closeModal('subcatModal')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="subcatModalId">
+      <div class="mfg"><label>Subcategory Name</label><input type="text" id="subcatName" placeholder="e.g. Wood Fireplaces"></div>
+      <div class="mfg"><label>Icon (emoji)</label><input type="text" id="subcatIcon" placeholder="e.g. 🪵"></div>
+      <div class="mfg"><label>Parent Category</label>
+        <select id="subcatParent"></select>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="modal-cancel" onclick="closeModal('subcatModal')">Cancel</button><button class="modal-save" onclick="saveSubcategory()">Save Subcategory</button></div>
+  </div>
+</div>
+
+<!-- Product Modal -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal">
+    <div class="modal-head"><h3 id="productModalTitle">Add Product</h3><button class="modal-close" onclick="closeModal('productModal')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="productModalId">
+      <div class="mfg"><label>Product Name</label><input type="text" id="productName" placeholder="e.g. Classic Marble Stone"></div>
+      <div class="mfg-row">
+        <div class="mfg"><label>Category</label><select id="productCat" onchange="updateSubcatSelect()"></select></div>
+        <div class="mfg"><label>Subcategory</label><select id="productSubcat"></select></div>
+      </div>
+      <div class="mfg-row">
+        <div class="mfg"><label>Price ($)</label><input type="number" id="productPrice" placeholder="0.00" min="0" step="0.01"></div>
+        <div class="mfg"><label>Price Unit</label><input type="text" id="productUnit" placeholder="per m² / per piece / etc."></div>
+      </div>
+      <div class="mfg"><label>Description</label><textarea id="productDesc" placeholder="Short product description..."></textarea></div>
+      <div class="mfg"><label>Image URL</label><input type="text" id="productImg" placeholder="https://..." oninput="updateImgPreview('productImgPreview',this.value)"></div>
+      <div class="img-preview" id="productImgPreview"><span>Image preview</span></div>
+      <div class="mfg"><label>Status</label>
+        <select id="productStatus"><option value="available">Available</option><option value="unavailable">Unavailable</option></select>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="modal-cancel" onclick="closeModal('productModal')">Cancel</button><button class="modal-save" onclick="saveProduct()">Save Product</button></div>
+  </div>
+</div>
 
 <script>
-// Nav scroll
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled',window.scrollY>60);
-});
+// ════════════════════════════════════════
+// DATA — stored in localStorage
+// ════════════════════════════════════════
+const ADMIN_PASS = 'stonemore2026';
+const WA_NUMBER = '96103412003';
+
+function loadData(){
+  const def = {
+    categories:[
+      {id:'cat1',name:'Stone & Cladding',icon:'🪨',img:'https://images.unsplash.com/photo-1612538498456-e861df91d4d0?w=600&q=80'},
+      {id:'cat2',name:'Fireplaces',icon:'🔥',img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80'},
+      {id:'cat3',name:'Stoves',icon:'🌡️',img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80'},
+      {id:'cat4',name:'BBQ & Ovens',icon:'🍖',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&q=80'},
+      {id:'cat5',name:'Fire Pits',icon:'🌀',img:'https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=600&q=80'},
+      {id:'cat6',name:'Roof Tiles',icon:'🏠',img:'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=80'},
+      {id:'cat7',name:'Artificial Grass',icon:'🌿',img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80'},
+      {id:'cat8',name:'Accessories',icon:'🛠️',img:'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80'},
+    ],
+    subcategories:[
+      {id:'sub1',name:'Natural Stone',icon:'🪨',catId:'cat1'},
+      {id:'sub2',name:'Artificial Stone',icon:'🧱',catId:'cat1'},
+      {id:'sub3',name:'Terrazzo',icon:'🟫',catId:'cat1'},
+      {id:'sub4',name:'Exterior Facades',icon:'🏗️',catId:'cat1'},
+      {id:'sub5',name:'Interior Cladding',icon:'🖼️',catId:'cat1'},
+      {id:'sub6',name:'Wood Fireplaces',icon:'🪵',catId:'cat2'},
+      {id:'sub7',name:'Gas Fireplaces',icon:'💨',catId:'cat2'},
+      {id:'sub8',name:'Electric Fireplaces',icon:'⚡',catId:'cat2'},
+      {id:'sub9',name:'Ethanol Fireplaces',icon:'🧪',catId:'cat2'},
+      {id:'sub10',name:'Fireplace Accessories',icon:'🔧',catId:'cat2'},
+      {id:'sub11',name:'Wood Stoves',icon:'🪵',catId:'cat3'},
+      {id:'sub12',name:'Gas Stoves',icon:'💨',catId:'cat3'},
+      {id:'sub13',name:'Stoves with Ovens',icon:'🫕',catId:'cat3'},
+      {id:'sub14',name:'Built-in BBQ',icon:'🔩',catId:'cat4'},
+      {id:'sub15',name:'Steel BBQ',icon:'🥩',catId:'cat4'},
+      {id:'sub16',name:'Pizza Ovens',icon:'🍕',catId:'cat4'},
+      {id:'sub17',name:'Outdoor Kitchens',icon:'🍳',catId:'cat4'},
+      {id:'sub18',name:'Wood Fire Pits',icon:'🪵',catId:'cat5'},
+      {id:'sub19',name:'Gas Fire Pits',icon:'💨',catId:'cat5'},
+      {id:'sub20',name:'Flat Tiles',icon:'▪️',catId:'cat6'},
+      {id:'sub21',name:'Curved Tiles',icon:'〰️',catId:'cat6'},
+      {id:'sub22',name:'Garden Grass',icon:'🌱',catId:'cat7'},
+      {id:'sub23',name:'Rooftop Grass',icon:'🏢',catId:'cat7'},
+      {id:'sub24',name:'Fireplace Tools',icon:'🔱',catId:'cat8'},
+      {id:'sub25',name:'BBQ Accessories',icon:'🍴',catId:'cat8'},
+    ],
+    products:[
+      {id:'p1',name:'Classic Marble Stone',catId:'cat1',subcatId:'sub1',price:45,unit:'per m²',desc:'Authentic Lebanese white marble for walls and floors.',img:'https://images.unsplash.com/photo-1612538498456-e861df91d4d0?w=400&q=75',status:'available'},
+      {id:'p2',name:'Grey Slate Cladding',catId:'cat1',subcatId:'sub1',price:38,unit:'per m²',desc:'Natural grey slate perfect for exterior facades.',img:'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&q=75',status:'available'},
+      {id:'p3',name:'Modern Terrazzo Panel',catId:'cat1',subcatId:'sub3',price:65,unit:'per m²',desc:'Contemporary terrazzo with flecked finish.',img:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&q=75',status:'available'},
+      {id:'p4',name:'Heritage Wood Fireplace',catId:'cat2',subcatId:'sub6',price:1200,unit:'per unit',desc:'Classic wood-burning fireplace with stone surround.',img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=75',status:'available',attrs:{fuelType:['Wood'],size:['80 cm'],heatOutput:['9-12 kw']}},
+      {id:'p5',name:'Modern Gas Fireplace',catId:'cat2',subcatId:'sub7',price:1800,unit:'per unit',desc:'Sleek gas fireplace with remote control.',img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&q=75',status:'available',attrs:{fuelType:['Gas'],size:['100 cm'],heatOutput:['9-12 kw']}},
+      {id:'p6',name:'Ethanol Wall Fire',catId:'cat2',subcatId:'sub9',price:650,unit:'per unit',desc:'Minimalist ethanol wall-mounted fire, no chimney needed.',img:'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400&q=75',status:'available',attrs:{fuelType:['Ethanol'],size:['60 cm']}},
+      {id:'p7',name:'Traditional Wood Stove',catId:'cat3',subcatId:'sub11',price:480,unit:'per unit',desc:'Cast iron wood stove, high efficiency heating.',img:'https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=400&q=75',status:'available',attrs:{fuelType:['Wood'],size:['50 cm'],heatOutput:['5-8 kw']}},
+      {id:'p8',name:'Built-in Stone BBQ',catId:'cat4',subcatId:'sub14',price:850,unit:'per unit',desc:'Custom stone-built BBQ for your outdoor kitchen.',img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&q=75',status:'available'},
+      {id:'p9',name:'Neapolitan Pizza Oven',catId:'cat4',subcatId:'sub16',price:1100,unit:'per unit',desc:'Authentic wood-fired pizza oven, reaches 500°C.',img:'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&q=75',status:'available'},
+      {id:'p10',name:'Round Garden Fire Pit',catId:'cat5',subcatId:'sub18',price:320,unit:'per unit',desc:'Elegant round fire pit for garden gatherings.',img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=75',status:'available'},
+      {id:'p11',name:'Curved Terracotta Tiles',catId:'cat6',subcatId:'sub21',price:28,unit:'per m²',desc:'Classic Lebanese curved roof tiles.',img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&q=75',status:'available',attrs:{shape:['Curved'],material:['Terracotta']}},
+      {id:'p12',name:'Premium Artificial Grass',catId:'cat7',subcatId:'sub22',price:35,unit:'per m²',desc:'Ultra-realistic 40mm pile artificial grass.',img:'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&q=75',status:'available'},
+      {id:'p13',name:'Fireplace Tool Set',catId:'cat8',subcatId:'sub24',price:85,unit:'per set',desc:'5-piece stainless steel fireplace tool set.',img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=75',status:'available'},
+      {id:'p14',name:'Electric Marble Fireplace',catId:'cat2',subcatId:'sub8',price:950,unit:'per unit',desc:'Modern electric fireplace with marble finish and LED flames.',img:'https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=400&q=75',status:'unavailable',attrs:{fuelType:['Electric'],size:['120 cm']}},
+    ]
+  };
+  const saved = localStorage.getItem('stoneAndMoreData');
+  return saved ? JSON.parse(saved) : def;
+}
+
+function saveData(data){ localStorage.setItem('stoneAndMoreData',JSON.stringify(data)); }
+
+localStorage.removeItem('stoneAndMoreData');
+let data = loadData();
+let cart = JSON.parse(localStorage.getItem('stoneCart')||'[]');
+let currentView = {type:'categories'};
+
+// ════════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════════
+function showPage(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  window.scrollTo(0,0);
+  if(page==='home') renderHomeCats();
+  if(page==='catalog') renderCatalog();
+  triggerReveals();
+}
+
+function triggerReveals(){
+  setTimeout(()=>{
+    document.querySelectorAll('[data-reveal]').forEach(el=>{
+      const rect=el.getBoundingClientRect();
+      if(rect.top<window.innerHeight) el.classList.add('visible');
+    });
+  },100);
+}
 
 // Burger
 const burger=document.getElementById('burger');
 const mobileMenu=document.getElementById('mobileMenu');
-burger.addEventListener('click',()=>{
-  burger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-  document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';
-});
-document.querySelectorAll('.m-link,.m-call').forEach(a=>{
-  a.addEventListener('click',()=>{
-    burger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow='';
-  });
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileMenu.classList.toggle('open');});
+function closeMobile(){burger.classList.remove('open');mobileMenu.classList.remove('open');}
+
+// Scroll reveal
+const revealObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObserver.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el));
+
+// Nav scroll
+window.addEventListener('scroll',()=>{ document.getElementById('nav').style.padding=window.scrollY>60?'.7rem 2rem':'1rem 2rem'; });
+
+// Admin shortcut: triple-click logo
+let clickCount=0;
+document.getElementById('nav').addEventListener('click',e=>{
+  if(e.target.closest('.nav-logo')){clickCount++;if(clickCount===3){clickCount=0;openAdminOverlay();}setTimeout(()=>clickCount=0,800);}
 });
 
-// Form
-function handleForm(e){
-  e.preventDefault();
-  const s=document.getElementById('formSuccess');
-  s.style.display='block';
-  e.target.reset();
-  setTimeout(()=>s.style.display='none',5000);
+// ════════════════════════════════════════
+// HOME CATS
+// ════════════════════════════════════════
+function renderHomeCats(){
+  const grid=document.getElementById('homeCatsGrid');
+  grid.innerHTML=data.categories.map(cat=>{
+    const subCount=data.subcategories.filter(s=>s.catId===cat.id).length;
+    const prodCount=data.products.filter(p=>p.catId===cat.id&&p.status==='available').length;
+    return `<div class="main-cat-card" onclick="goToCat('${cat.id}')">
+      <div class="main-cat-img">
+        <img src="${cat.img||'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=70'}" alt="${cat.name}" loading="lazy">
+        <div class="main-cat-img-overlay"></div>
+      </div>
+      <div class="main-cat-body">
+        <span class="main-cat-icon">${cat.icon||'📦'}</span>
+        <div class="main-cat-name">${cat.name}</div>
+        <div class="main-cat-count">${subCount} subcategories · ${prodCount} products</div>
+        <div class="main-cat-arrow"><span>Browse →</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-// Reveal on scroll
-const reveals=document.querySelectorAll('[data-reveal]');
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach((entry,i)=>{
-    if(entry.isIntersecting){
-      setTimeout(()=>entry.target.classList.add('visible'),i*80);
-      observer.unobserve(entry.target);
+// ════════════════════════════════════════
+// CATALOG
+// ════════════════════════════════════════
+function renderCatalog(){
+  currentView={type:'categories'};
+  document.getElementById('breadcrumb').innerHTML=`<a onclick="showPage('home')">Home</a><span>›</span><span>Products</span>`;
+  document.getElementById('catalogTitle').textContent='All Categories';
+  document.getElementById('catalogSubtitle').textContent='Browse our full range of premium building materials';
+  const view=document.getElementById('catalogView');
+  view.innerHTML=`<div class="main-cats-grid">${data.categories.map(cat=>{
+    const subCount=data.subcategories.filter(s=>s.catId===cat.id).length;
+    const prodCount=data.products.filter(p=>p.catId===cat.id&&p.status==='available').length;
+    return `<div class="main-cat-card" onclick="goToCat('${cat.id}')">
+      <div class="main-cat-img">
+        <img src="${cat.img||'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=70'}" alt="${cat.name}" loading="lazy">
+        <div class="main-cat-img-overlay"></div>
+      </div>
+      <div class="main-cat-body">
+        <span class="main-cat-icon">${cat.icon||'📦'}</span>
+        <div class="main-cat-name">${cat.name}</div>
+        <div class="main-cat-count">${subCount} subcategories · ${prodCount} products</div>
+        <div class="main-cat-arrow"><span>Browse →</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function goToCat(catId){
+  showPage('catalog');
+  const cat=data.categories.find(c=>c.id===catId);
+  if(!cat)return;
+  currentView={type:'subcategories',catId};
+  document.getElementById('breadcrumb').innerHTML=`<a onclick="showPage('home')">Home</a><span>›</span><a onclick="renderCatalog()">Products</a><span>›</span><span>${cat.name}</span>`;
+  document.getElementById('catalogTitle').textContent=cat.name;
+  const subcats=data.subcategories.filter(s=>s.catId===catId);
+  document.getElementById('catalogSubtitle').textContent=`${subcats.length} subcategories`;
+  const view=document.getElementById('catalogView');
+  // Show subcats + direct products without subcat
+  view.innerHTML=`<div class="subcats-grid">${subcats.map(sub=>{
+    const prodCount=data.products.filter(p=>p.subcatId===sub.id&&p.status==='available').length;
+    return `<div class="subcat-card" onclick="goToSubcat('${sub.id}','${catId}')">
+      <div class="subcat-icon">${sub.icon||'📦'}</div>
+      <div class="subcat-name">${sub.name}</div>
+      <div class="subcat-count">${prodCount} products</div>
+      <div class="subcat-arrow">Browse →</div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+
+// ════════════ FILTER STATE ════════════
+let filterState = {
+  search: '',
+  minPrice: 0,
+  maxPrice: 99999,
+  sort: 'default',
+  attrs: {} // e.g. {fuelType: ['Wood','Gas'], size: ['45 cm']}
+};
+
+function getAttrOptions(subcatId) {
+  const prods = data.products.filter(p => p.subcatId === subcatId);
+  const attrs = {};
+  prods.forEach(p => {
+    if (p.attrs) {
+      Object.entries(p.attrs).forEach(([key, val]) => {
+        if (!attrs[key]) attrs[key] = new Set();
+        if (Array.isArray(val)) val.forEach(v => attrs[key].add(v));
+        else attrs[key].add(val);
+      });
     }
   });
-},{threshold:0.12});
-reveals.forEach(el=>observer.observe(el));
+  return attrs;
+}
+
+function getPriceRange(subcatId) {
+  const prods = data.products.filter(p => p.subcatId === subcatId && p.price);
+  if (!prods.length) return {min:0, max:9999};
+  const prices = prods.map(p => Number(p.price));
+  return {min: Math.min(...prices), max: Math.max(...prices)};
+}
+
+function applyFilters(prods) {
+  let result = [...prods];
+  if (filterState.search) {
+    const q = filterState.search.toLowerCase();
+    result = result.filter(p => p.name.toLowerCase().includes(q) || (p.desc||'').toLowerCase().includes(q));
+  }
+  result = result.filter(p => Number(p.price) >= filterState.minPrice && Number(p.price) <= filterState.maxPrice);
+  Object.entries(filterState.attrs).forEach(([key, vals]) => {
+    if (vals.length) {
+      result = result.filter(p => {
+        if (!p.attrs || !p.attrs[key]) return false;
+        const pval = Array.isArray(p.attrs[key]) ? p.attrs[key] : [p.attrs[key]];
+        return vals.some(v => pval.includes(v));
+      });
+    }
+  });
+  if (filterState.sort === 'price_asc') result.sort((a,b) => Number(a.price) - Number(b.price));
+  else if (filterState.sort === 'price_desc') result.sort((a,b) => Number(b.price) - Number(a.price));
+  else if (filterState.sort === 'newest') result.reverse();
+  return result;
+}
+
+function toggleAttr(key, val) {
+  if (!filterState.attrs[key]) filterState.attrs[key] = [];
+  const idx = filterState.attrs[key].indexOf(val);
+  if (idx > -1) filterState.attrs[key].splice(idx, 1);
+  else filterState.attrs[key].push(val);
+  renderProductsWithFilters();
+}
+
+function clearAllFilters() {
+  filterState.search = '';
+  filterState.attrs = {};
+  const pr = getPriceRange(currentView.subcatId);
+  filterState.minPrice = pr.min;
+  filterState.maxPrice = pr.max;
+  filterState.sort = 'default';
+  renderProductsWithFilters();
+}
+
+function renderActiveChips() {
+  const chips = [];
+  if (filterState.search) chips.push({label: `"${filterState.search}"`, clear: () => { filterState.search = ''; renderProductsWithFilters(); }});
+  Object.entries(filterState.attrs).forEach(([key, vals]) => {
+    vals.forEach(v => chips.push({label: v, clear: () => toggleAttr(key, v)}));
+  });
+  return chips;
+}
+
+function toggleFilterCard(el) {
+  el.closest('.filter-card').classList.toggle('collapsed');
+}
+
+function toggleMobileFilter() {
+  document.querySelector('.filter-sidebar').classList.toggle('mobile-open');
+  document.querySelector('.filter-sidebar-overlay').classList.toggle('open');
+}
+
+function renderProductsWithFilters() {
+  const allProds = data.products.filter(p => p.subcatId === currentView.subcatId);
+  const filtered = applyFilters(allProds);
+  const chips = renderActiveChips();
+  const hasFilters = chips.length > 0;
+
+  // update search input value
+  const si = document.getElementById('filterSearchInput');
+  if (si) si.value = filterState.search;
+
+  // update sort
+  const ss = document.getElementById('sortSelect');
+  if (ss) ss.value = filterState.sort;
+
+  // active chips
+  const ac = document.getElementById('activeChips');
+  if (ac) {
+    ac.innerHTML = chips.map((c,i) => `
+      <span class="filter-chip" onclick="(${c.clear.toString()})();renderProductsWithFilters()">
+        ${c.label}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </span>`).join('') +
+      (hasFilters ? `<button class="clear-all-btn" onclick="clearAllFilters()">Clear all</button>` : '');
+  }
+
+  // count - bottom
+  const pc = document.getElementById('productsCount');
+  if (pc) pc.innerHTML = `Showing <strong>${filtered.length}</strong> of <strong>${allProds.length}</strong> products`;
+
+
+  // products grid
+  const grid = document.getElementById('productsGridArea');
+  if (!grid) return;
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="no-results">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <p>No products match your filters.</p>
+      <button onclick="clearAllFilters()">Clear filters</button>
+    </div>`;
+  } else {
+    grid.innerHTML = `<div class="products-grid" style="padding:0;margin:0">${filtered.map(p => productCardHTML(p)).join('')}</div>`;
+  }
+
+  // re-render attr checkboxes
+  renderAttrFilters();
+}
+
+function renderAttrFilters() {
+  const attrs = getAttrOptions(currentView.subcatId);
+  const allProds = data.products.filter(p => p.subcatId === currentView.subcatId);
+  Object.entries(attrs).forEach(([key, valSet]) => {
+    const container = document.getElementById('attrFilter_' + key);
+    if (!container) return;
+    container.innerHTML = [...valSet].sort().map(val => {
+      const count = allProds.filter(p => {
+        if (!p.attrs || !p.attrs[key]) return false;
+        const pv = Array.isArray(p.attrs[key]) ? p.attrs[key] : [p.attrs[key]];
+        return pv.includes(val);
+      }).length;
+      const checked = filterState.attrs[key] && filterState.attrs[key].includes(val);
+      return `<div class="filter-check-item ${checked?'checked':''}" onclick="toggleAttr('${key}','${val}')">
+        <div class="filter-check-left">
+          <div class="filter-check-box"></div>
+          <span class="filter-check-label">${val}</span>
+        </div>
+        <span class="filter-check-count">${count}</span>
+      </div>`;
+    }).join('');
+  });
+}
+
+function buildFilterSidebar(subcatId) {
+  const pr = getPriceRange(subcatId);
+  filterState.minPrice = pr.min;
+  filterState.maxPrice = pr.max;
+  filterState.search = '';
+  filterState.attrs = {};
+  filterState.sort = 'default';
+
+  const attrs = getAttrOptions(subcatId);
+  const attrBlocks = Object.entries(attrs).map(([key, valSet]) => {
+    const label = key.replace(/([A-Z])/g,' $1').replace(/^./,s=>s.toUpperCase());
+    return `<div class="filter-card">
+      <div class="filter-card-head" onclick="toggleFilterCard(this)">
+        <h4>Filter by ${label}</h4>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="filter-card-body" id="attrFilter_${key}"></div>
+    </div>`;
+  }).join('');
+
+  return `
+    <!-- Mobile close -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+      <span style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">Filters</span>
+      <button onclick="toggleMobileFilter()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;display:none" class="mobile-close-filter">✕</button>
+    </div>
+
+    <!-- Search -->
+    <div class="filter-card">
+      <div class="filter-card-head" onclick="toggleFilterCard(this)">
+        <h4>Search</h4>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="filter-card-body">
+        <div class="filter-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="filterSearchInput" placeholder="Search products..." oninput="filterState.search=this.value;renderProductsWithFilters()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="filter-card">
+      <div class="filter-card-head" onclick="toggleFilterCard(this)">
+        <h4>Filter by Price</h4>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="filter-card-body">
+        <div class="price-inputs">
+          <div class="price-input-g">
+            <label>Min ($)</label>
+            <input type="number" id="priceMin" value="${pr.min}" min="${pr.min}" max="${pr.max}" oninput="filterState.minPrice=+this.value;renderProductsWithFilters()">
+          </div>
+          <div class="price-input-g">
+            <label>Max ($)</label>
+            <input type="number" id="priceMax" value="${pr.max}" min="${pr.min}" max="${pr.max}" oninput="filterState.maxPrice=+this.value;renderProductsWithFilters()">
+          </div>
+        </div>
+        <div style="font-size:.78rem;color:var(--muted)">Price: <span style="color:var(--gold)">$${pr.min} — $${pr.max}</span></div>
+      </div>
+    </div>
+
+    ${attrBlocks}
+  `;
+}
+
+function goToSubcat(subcatId,catId){
+  const sub=data.subcategories.find(s=>s.id===subcatId);
+  const cat=data.categories.find(c=>c.id===catId);
+  if(!sub||!cat)return;
+  currentView={type:'products',subcatId,catId};
+  document.getElementById('breadcrumb').innerHTML=`<a onclick="showPage('home')">Home</a><span>›</span><a onclick="renderCatalog()">Products</a><span>›</span><a onclick="goToCat('${catId}')">${cat.name}</a><span>›</span><span>${sub.name}</span>`;
+  document.getElementById('catalogTitle').textContent=sub.name;
+  const allProds=data.products.filter(p=>p.subcatId===subcatId);
+  document.getElementById('catalogSubtitle').textContent=`${allProds.length} products`;
+  const view=document.getElementById('catalogView');
+
+  const sidebarHTML = buildFilterSidebar(subcatId);
+
+  view.innerHTML=`
+    <div class="filter-sidebar-overlay" onclick="toggleMobileFilter()"></div>
+    <div class="catalog-layout" style="box-sizing:border-box">
+      <div class="filter-sidebar" id="filterSidebar">${sidebarHTML}</div>
+      <div style="min-width:0;overflow:hidden">
+        <div class="products-topbar">
+          <div style="display:flex;align-items:center;gap:.75rem">
+            <button class="filter-toggle-btn" onclick="toggleMobileFilter()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="10" y2="18"/></svg>
+              Filters
+            </button>
+          </div>
+          <select class="sort-select" id="sortSelect" onchange="filterState.sort=this.value;renderProductsWithFilters()">
+            <option value="default">Default sorting</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="newest">Newest</option>
+          </select>
+        </div>
+        <div class="active-filters" id="activeChips"></div>
+        <div id="productsGridArea"></div>
+        <div id="productsCount" style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--muted);text-align:center"></div>
+      </div>
+    </div>`;
+
+  renderProductsWithFilters();
+}
+
+function productCardHTML(p){
+  const inCart=cart.find(c=>c.id===p.id);
+  const unavail=p.status==='unavailable';
+  return `<div class="product-card">
+    <div class="product-img">
+      <img src="${p.img||'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=70'}" alt="${p.name}" loading="lazy">
+      ${unavail?'<div class="product-unavailable-badge">Unavailable</div>':''}
+    </div>
+    <div class="product-body">
+      <div class="product-cat-tag">${getCatName(p.catId)}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-desc">${p.desc||''}</div>
+      <div class="product-price">$${Number(p.price).toLocaleString()} <small>${p.unit||''}</small></div>
+    </div>
+    <div class="product-footer">
+      <button class="add-to-cart-btn ${inCart?'added':''} ${unavail?'':''}
+      " onclick="addToCart('${p.id}')" ${unavail?'disabled':''}>
+        ${unavail?'Unavailable':inCart?'✓ Added':'🛒 Add to Cart'}
+      </button>
+    </div>
+  </div>`;
+}
+
+function getCatName(catId){
+  const c=data.categories.find(c=>c.id===catId);return c?c.name:'';
+}
+function getSubcatName(subcatId){
+  const s=data.subcategories.find(s=>s.id===subcatId);return s?s.name:'';
+}
+
+// ════════════════════════════════════════
+// CART
+// ════════════════════════════════════════
+function addToCart(productId){
+  const p=data.products.find(p=>p.id===productId);
+  if(!p||p.status==='unavailable')return;
+  const existing=cart.find(c=>c.id===productId);
+  if(existing){existing.qty++;}else{cart.push({id:p.id,name:p.name,price:Number(p.price),unit:p.unit||'',img:p.img||'',cat:getCatName(p.catId),qty:1});}
+  localStorage.setItem('stoneCart',JSON.stringify(cart));
+  updateCartUI();
+  showToast(`✓ ${p.name} added to cart`,'gold');
+  // Refresh product view
+  if(currentView.type==='products') goToSubcat(currentView.subcatId,currentView.catId);
+}
+
+function removeFromCart(productId){
+  cart=cart.filter(c=>c.id!==productId);
+  localStorage.setItem('stoneCart',JSON.stringify(cart));
+  updateCartUI();
+}
+
+function changeQty(productId,delta){
+  const item=cart.find(c=>c.id===productId);
+  if(!item)return;
+  item.qty+=delta;
+  if(item.qty<=0)removeFromCart(productId);
+  else{localStorage.setItem('stoneCart',JSON.stringify(cart));updateCartUI();}
+}
+
+function clearCart(){
+  cart=[];
+  localStorage.setItem('stoneCart',JSON.stringify(cart));
+  updateCartUI();
+}
+
+function updateCartUI(){
+  const badge=document.getElementById('cartBadge');
+  const totalItems=cart.reduce((s,c)=>s+c.qty,0);
+  badge.textContent=totalItems;
+  badge.style.display=totalItems>0?'flex':'none';
+  renderCartItems();
+}
+
+function renderCartItems(){
+  const container=document.getElementById('cartItems');
+  const footer=document.getElementById('cartFooter');
+  if(!cart.length){
+    container.innerHTML=`<div class="cart-empty"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/></svg><p>Your cart is empty</p><button class="btn-ghost" onclick="showPage('catalog');toggleCart()">Browse Products</button></div>`;
+    footer.style.display='none';return;
+  }
+  footer.style.display='block';
+  const total=cart.reduce((s,c)=>s+(c.price*c.qty),0);
+  container.innerHTML=cart.map(item=>`
+    <div class="cart-item">
+      <div class="cart-item-img"><img src="${item.img||''}" alt="${item.name}" loading="lazy"></div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-cat">${item.cat}</div>
+        <div class="cart-item-price">$${(item.price*item.qty).toLocaleString()} <small>($${item.price}/${item.unit||'unit'})</small></div>
+      </div>
+      <div class="cart-item-controls">
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+        </div>
+        <button class="remove-btn" onclick="removeFromCart('${item.id}')">✕ Remove</button>
+      </div>
+    </div>`).join('');
+  document.getElementById('cartTotal').textContent=`$${total.toLocaleString()}`;
+}
+
+function toggleCart(){
+  const overlay=document.getElementById('cartOverlay');
+  const drawer=document.getElementById('cartDrawer');
+  overlay.classList.toggle('open');
+  drawer.classList.toggle('open');
+  renderCartItems();
+}
+
+function checkoutWhatsApp(){
+  if(!cart.length)return;
+  const total=cart.reduce((s,c)=>s+(c.price*c.qty),0);
+  let msg=`Hello Stone & More! 👋\n\nI'd like to inquire about the following products:\n\n`;
+  cart.forEach(item=>{msg+=`• ${item.name} x${item.qty} — $${(item.price*item.qty).toLocaleString()}\n`;});
+  msg+=`\n💰 *Total: $${total.toLocaleString()}*\n\nPlease confirm availability. Thank you! 🙏`;
+  const url=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(url,'_blank');
+}
+
+// ════════════════════════════════════════
+// TOAST
+// ════════════════════════════════════════
+function showToast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast '+(type||'');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ════════════════════════════════════════
+// CONTACT FORM
+// ════════════════════════════════════════
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('formSuccess').style.display='block';
+  e.target.reset();
+  setTimeout(()=>document.getElementById('formSuccess').style.display='none',5000);
+}
+
+// ════════════════════════════════════════
+// ADMIN
+// ════════════════════════════════════════
+function openAdminOverlay(){document.getElementById('adminOverlay').classList.add('open');document.getElementById('adminPass').focus();}
+function adminLogin(){
+  const pass=document.getElementById('adminPass').value;
+  const err=document.getElementById('adminError');
+  if(pass===ADMIN_PASS){
+    document.getElementById('adminOverlay').classList.remove('open');
+    document.getElementById('adminPanel').classList.add('open');
+    document.body.style.overflow='hidden';
+    renderAdminDashboard();
+    document.getElementById('adminPass').value='';
+    err.style.display='none';
+  }else{err.style.display='block';}
+}
+function closeAdmin(){document.getElementById('adminPanel').classList.remove('open');document.body.style.overflow='';}
+
+function showAdminTab(tab){
+  document.querySelectorAll('.admin-tab').forEach((t,i)=>{
+    const tabs=['dashboard','categories','products'];
+    t.classList.toggle('active',tabs[i]===tab);
+  });
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('admin-'+tab).classList.add('active');
+  if(tab==='dashboard')renderAdminDashboard();
+  if(tab==='categories')renderAdminCategories();
+  if(tab==='products')renderAdminProducts();
+}
+
+function renderAdminDashboard(){
+  document.getElementById('adminStats').innerHTML=`
+    <div class="admin-stat-card"><span class="admin-stat-num">${data.categories.length}</span><span class="admin-stat-label">Categories</span></div>
+    <div class="admin-stat-card"><span class="admin-stat-num">${data.subcategories.length}</span><span class="admin-stat-label">Subcategories</span></div>
+    <div class="admin-stat-card"><span class="admin-stat-num">${data.products.length}</span><span class="admin-stat-label">Total Products</span></div>
+    <div class="admin-stat-card"><span class="admin-stat-num">${data.products.filter(p=>p.status==='available').length}</span><span class="admin-stat-label">Available</span></div>`;
+  document.getElementById('dashboardTable').innerHTML=data.products.slice(0,8).map(p=>`
+    <tr><td><div class="admin-img-thumb"><img src="${p.img||''}" alt="" loading="lazy"></div></td>
+    <td>${p.name}</td><td>${getCatName(p.catId)}</td><td>$${Number(p.price).toLocaleString()}</td>
+    <td><span class="status-badge ${p.status==='available'?'status-available':'status-unavailable'}">${p.status}</span></td></tr>`).join('');
+}
+
+function renderAdminCategories(){
+  document.getElementById('catsTable').innerHTML=data.categories.map(cat=>`
+    <tr><td><span style="font-size:1.3rem">${cat.icon||'📦'}</span></td>
+    <td>${cat.name}</td>
+    <td>${data.subcategories.filter(s=>s.catId===cat.id).length}</td>
+    <td>${data.products.filter(p=>p.catId===cat.id).length}</td>
+    <td><div class="admin-action-btns">
+      <button class="edit-btn" onclick="openCatModal('${cat.id}')">Edit</button>
+      <button class="delete-btn" onclick="deleteCategory('${cat.id}')">Delete</button>
+    </div></td></tr>`).join('');
+  document.getElementById('subcatsTable').innerHTML=data.subcategories.map(sub=>{
+    const cat=data.categories.find(c=>c.id===sub.catId);
+    return `<tr><td>${sub.icon||''} ${sub.name}</td>
+    <td>${cat?cat.name:'—'}</td>
+    <td>${data.products.filter(p=>p.subcatId===sub.id).length}</td>
+    <td><div class="admin-action-btns">
+      <button class="edit-btn" onclick="openSubcatModal('${sub.id}')">Edit</button>
+      <button class="delete-btn" onclick="deleteSubcat('${sub.id}')">Delete</button>
+    </div></td></tr>`;}).join('');
+}
+
+function renderAdminProducts(){
+  // Filter select
+  const filterSel=document.getElementById('filterCat');
+  const currentFilter=filterSel.value;
+  filterSel.innerHTML='<option value="">All Categories</option>'+data.categories.map(c=>`<option value="${c.id}" ${c.id===currentFilter?'selected':''}>${c.name}</option>`).join('');
+  renderProductsTable();
+}
+
+function renderProductsTable(){
+  const filter=document.getElementById('filterCat').value;
+  const prods=filter?data.products.filter(p=>p.catId===filter):data.products;
+  document.getElementById('productsTable').innerHTML=prods.map(p=>`
+    <tr><td><div class="admin-img-thumb"><img src="${p.img||''}" alt="" loading="lazy"></div></td>
+    <td>${p.name}</td>
+    <td>${getSubcatName(p.subcatId)}</td>
+    <td>$${Number(p.price).toLocaleString()} <small style="color:var(--muted)">${p.unit||''}</small></td>
+    <td><span class="status-badge ${p.status==='available'?'status-available':'status-unavailable'}">${p.status}</span></td>
+    <td><div class="admin-action-btns">
+      <button class="toggle-btn" onclick="toggleProduct('${p.id}')">${p.status==='available'?'Disable':'Enable'}</button>
+      <button class="edit-btn" onclick="openProductModal('${p.id}')">Edit</button>
+      <button class="delete-btn" onclick="deleteProduct('${p.id}')">Delete</button>
+    </div></td></tr>`).join('');
+}
+
+// MODALS
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+
+function updateImgPreview(previewId,url){
+  const el=document.getElementById(previewId);
+  if(url){el.innerHTML=`<img src="${url}" alt="preview" onerror="this.parentElement.innerHTML='<span>Invalid URL</span>'">`;}
+  else{el.innerHTML='<span>Image preview</span>';}
+}
+
+// CATEGORY MODAL
+function openCatModal(catId){
+  document.getElementById('catModalId').value=catId||'';
+  if(catId){
+    const cat=data.categories.find(c=>c.id===catId);
+    document.getElementById('catModalTitle').textContent='Edit Category';
+    document.getElementById('catName').value=cat.name;
+    document.getElementById('catIcon').value=cat.icon||'';
+    document.getElementById('catImg').value=cat.img||'';
+    updateImgPreview('catImgPreview',cat.img||'');
+  }else{
+    document.getElementById('catModalTitle').textContent='Add Category';
+    document.getElementById('catName').value='';
+    document.getElementById('catIcon').value='';
+    document.getElementById('catImg').value='';
+    updateImgPreview('catImgPreview','');
+  }
+  openModal('catModal');
+}
+
+function saveCategory(){
+  const id=document.getElementById('catModalId').value;
+  const name=document.getElementById('catName').value.trim();
+  const icon=document.getElementById('catIcon').value.trim();
+  const img=document.getElementById('catImg').value.trim();
+  if(!name){showToast('Please enter a category name');return;}
+  if(id){
+    const cat=data.categories.find(c=>c.id===id);
+    cat.name=name;cat.icon=icon;cat.img=img;
+  }else{
+    data.categories.push({id:'cat'+Date.now(),name,icon,img});
+  }
+  saveData(data);closeModal('catModal');renderAdminCategories();
+  showToast('Category saved!','gold');
+}
+
+function deleteCategory(catId){
+  if(!confirm('Delete this category and all its subcategories?'))return;
+  data.categories=data.categories.filter(c=>c.id!==catId);
+  data.subcategories=data.subcategories.filter(s=>s.catId!==catId);
+  data.products=data.products.filter(p=>p.catId!==catId);
+  saveData(data);renderAdminCategories();showToast('Category deleted');
+}
+
+// SUBCAT MODAL
+function openSubcatModal(subcatId){
+  const sel=document.getElementById('subcatParent');
+  sel.innerHTML=data.categories.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+  document.getElementById('subcatModalId').value=subcatId||'';
+  if(subcatId){
+    const sub=data.subcategories.find(s=>s.id===subcatId);
+    document.getElementById('subcatModalTitle').textContent='Edit Subcategory';
+    document.getElementById('subcatName').value=sub.name;
+    document.getElementById('subcatIcon').value=sub.icon||'';
+    sel.value=sub.catId;
+  }else{
+    document.getElementById('subcatModalTitle').textContent='Add Subcategory';
+    document.getElementById('subcatName').value='';
+    document.getElementById('subcatIcon').value='';
+  }
+  openModal('subcatModal');
+}
+
+function saveSubcategory(){
+  const id=document.getElementById('subcatModalId').value;
+  const name=document.getElementById('subcatName').value.trim();
+  const icon=document.getElementById('subcatIcon').value.trim();
+  const catId=document.getElementById('subcatParent').value;
+  if(!name){showToast('Please enter a name');return;}
+  if(id){
+    const sub=data.subcategories.find(s=>s.id===id);
+    sub.name=name;sub.icon=icon;sub.catId=catId;
+  }else{
+    data.subcategories.push({id:'sub'+Date.now(),name,icon,catId});
+  }
+  saveData(data);closeModal('subcatModal');renderAdminCategories();showToast('Subcategory saved!','gold');
+}
+
+function deleteSubcat(subcatId){
+  if(!confirm('Delete this subcategory?'))return;
+  data.subcategories=data.subcategories.filter(s=>s.id!==subcatId);
+  saveData(data);renderAdminCategories();showToast('Subcategory deleted');
+}
+
+// PRODUCT MODAL
+function openProductModal(productId){
+  const catSel=document.getElementById('productCat');
+  catSel.innerHTML=data.categories.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+  document.getElementById('productModalId').value=productId||'';
+  if(productId){
+    const p=data.products.find(p=>p.id===productId);
+    document.getElementById('productModalTitle').textContent='Edit Product';
+    document.getElementById('productName').value=p.name;
+    document.getElementById('productPrice').value=p.price;
+    document.getElementById('productUnit').value=p.unit||'';
+    document.getElementById('productDesc').value=p.desc||'';
+    document.getElementById('productImg').value=p.img||'';
+    document.getElementById('productStatus').value=p.status;
+    catSel.value=p.catId;
+    updateSubcatSelect(p.subcatId);
+    updateImgPreview('productImgPreview',p.img||'');
+  }else{
+    document.getElementById('productModalTitle').textContent='Add Product';
+    ['productName','productPrice','productUnit','productDesc','productImg'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('productStatus').value='available';
+    updateSubcatSelect();
+    updateImgPreview('productImgPreview','');
+  }
+  openModal('productModal');
+}
+
+function updateSubcatSelect(selectedId){
+  const catId=document.getElementById('productCat').value;
+  const subs=data.subcategories.filter(s=>s.catId===catId);
+  const sel=document.getElementById('productSubcat');
+  sel.innerHTML=subs.map(s=>`<option value="${s.id}" ${s.id===selectedId?'selected':''}>${s.name}</option>`).join('');
+}
+
+function saveProduct(){
+  const id=document.getElementById('productModalId').value;
+  const name=document.getElementById('productName').value.trim();
+  const price=parseFloat(document.getElementById('productPrice').value)||0;
+  const unit=document.getElementById('productUnit').value.trim();
+  const desc=document.getElementById('productDesc').value.trim();
+  const img=document.getElementById('productImg').value.trim();
+  const catId=document.getElementById('productCat').value;
+  const subcatId=document.getElementById('productSubcat').value;
+  const status=document.getElementById('productStatus').value;
+  if(!name){showToast('Please enter a product name');return;}
+  if(id){
+    const p=data.products.find(p=>p.id===id);
+    Object.assign(p,{name,price,unit,desc,img,catId,subcatId,status});
+  }else{
+    data.products.push({id:'p'+Date.now(),name,price,unit,desc,img,catId,subcatId,status});
+  }
+  saveData(data);closeModal('productModal');renderAdminProducts();showToast('Product saved!','gold');
+}
+
+function toggleProduct(productId){
+  const p=data.products.find(p=>p.id===productId);
+  if(!p)return;
+  p.status=p.status==='available'?'unavailable':'available';
+  saveData(data);renderAdminProducts();
+  showToast(`Product ${p.status==='available'?'enabled':'disabled'}`,'gold');
+}
+
+function deleteProduct(productId){
+  if(!confirm('Delete this product?'))return;
+  data.products=data.products.filter(p=>p.id!==productId);
+  saveData(data);renderAdminProducts();showToast('Product deleted');
+}
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+renderHomeCats();
+updateCartUI();
+triggerReveals();
+
+// keyboard shortcut: Ctrl+Shift+A = admin
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key==='A')openAdminOverlay();});
 </script>
 </body>
 </html>
